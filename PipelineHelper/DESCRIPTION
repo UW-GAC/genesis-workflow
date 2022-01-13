@@ -1,0 +1,14 @@
+Package: PipelineHelper
+Version: 0.1.0
+Type: Package
+Title: Utilities for the analysis pipeline
+Description: Utilities for the analysis pipeline.
+Author: Stephanie Gogarten
+Maintainer: Stephanie Gogarten <sdmorris@uw.edu>
+Depends:
+Imports: methods, stats, tools, utils, Matrix, dplyr, lazyeval, rmarkdown,
+	 Biobase, gdsfmt, GenomicRanges,
+	 IRanges, S4Vectors, SeqArray, SeqVarTools
+Suggests: roxygen2, testthat, BiocParallel, GENESIS, GWASTools, SNPRelate, ggplot2, grid
+License: MIT + file LICENSE
+RoxygenNote: 7.1.1

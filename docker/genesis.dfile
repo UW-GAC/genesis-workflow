@@ -1,0 +1,4 @@
+FROM uwgac/r-4.1.1-mkl
+
+RUN Rscript -e 'install.packages(c("BiocManager", "remotes"), repos="https://cloud.r-project.org")' && \
+    Rscript -e 'BiocManager::install(c("SeqVarTools", "SNPRelate", "GENESIS", "survey", "CompQuadForm", "argparser", "BiocParallel", "data.table", "ggplot2", "GGally", "hexbin", "lazyeval", "logistf", "poibin", "readr", "R.utils", "rmarkdown", "SPAtest"), update=FALSE, ask=FALSE)'

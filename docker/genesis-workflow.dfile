@@ -1,0 +1,8 @@
+FROM uwgac/genesis:2.24.0
+
+USER root
+RUN cd /usr/local  && \
+    git clone https://github.com/UW-GAC/genesis-workflow.git && \
+    cd genesis-workflow && \
+    R CMD INSTALL PipelineHelper
+   

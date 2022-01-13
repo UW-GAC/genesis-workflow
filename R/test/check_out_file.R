@@ -1,0 +1,6 @@
+args <- commandArgs(trailingOnly=TRUE)
+x <- PipelineHelper::getobj(args[1])
+head(x)
+length(x)
+nrow(x)
+if (is.list(x)) lapply(x, summary)

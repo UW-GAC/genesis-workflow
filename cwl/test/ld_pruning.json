@@ -1,0 +1,23 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_chr1.gds"
+    },
+    "autosome_only": "TRUE",
+    "exclude_pca_corr": "TRUE",
+    "genome_build", "hg19",
+    "ld_r_threshold": 0.32,
+    "ld_win_size": 10,
+    "maf_threshold": 0.01,
+    "missing_threshold": 0.01,
+    "out_prefix": "test",
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_chr1.RData"
+    },
+    "chromosome": "1"
+}
