@@ -7,7 +7,7 @@ $namespaces:
 requirements:
 - class: ShellCommandRequirement
 - class: DockerRequirement
-  dockerPull: uwgac/analysis_pipeline_3:0.1.0
+  dockerPull: uwgac/genesis-workflow:3.0.0
 - class: InlineJavascriptRequirement
 
 inputs:
@@ -177,7 +177,7 @@ baseCommand:
 arguments:
 - prefix: <
   position: 100
-  valueFrom: /usr/local/analysis_pipeline_cwl/R/ld_pruning.R
+  valueFrom: /usr/local/genesis-workflow/R/ld_pruning.R
   shellQuote: false
 
 hints:
