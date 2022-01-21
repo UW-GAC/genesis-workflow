@@ -5,10 +5,8 @@ library(tools)
 sessionInfo()
 
 argp <- arg_parser("Check merged GDS")
-argp <- add_argument(argp, "--gds_file", nargs=Inf,
-                     help="GDS files to check")
-argp <- add_argument(argp, "--merged_gds_file", 
-                     help="output file name")
+argp <- add_argument(argp, "--gds_file", help="GDS file to check")
+argp <- add_argument(argp, "--merged_gds_file", help="merged GDS file")
 argv <- parse_args(argp)
 writeParams(argv, "check_merged_gds.params")
 

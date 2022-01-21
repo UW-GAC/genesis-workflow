@@ -6,6 +6,7 @@ sessionInfo()
 
 argp <- arg_parser("LD pruning")
 argp <- add_argument(argp, "--gds_file", help="GDS file")
+argp <- add_argument(argp, "--out_file", help="output file name")
 argp <- add_argument(argp, "--autosome_only", default=TRUE,
                      help="Only include autosomes")
 argp <- add_argument(argp, "--exclude_pca_corr", default=TRUE,
@@ -20,8 +21,6 @@ argp <- add_argument(argp, "--maf_threshold", default=0.01,
                      help="Minimum MAF for variants used")
 argp <- add_argument(argp, "--missing_threshold", default=0.01,
                      help="Maximum missing call rate for variants used")
-argp <- add_argument(argp, "--out_prefix", default="",
-                     help="prefix for output files")
 argp <- add_argument(argp, "--sample_include_file",
                      help="RData file with vector of sample.id to include")
 argp <- add_argument(argp, "--variant_include_file",
@@ -72,6 +71,6 @@ snpset <- snpgdsLDpruning(gds,
                           ld.threshold=argv$ld_r_threshold)
 
 pruned <- unlist(snpset, use.names=FALSE)
-save(pruned, file=constructFilename(argv$out_prefix, "pruned_variants"))
+save(pruned, file=argv$out_file)
 
 seqClose(gds)

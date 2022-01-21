@@ -5,7 +5,7 @@ sessionInfo()
 
 argp <- arg_parser("Subset GDS file")
 argp <- add_argument(argp, "--gds_file", help="GDS file")
-argp <- add_argument(argp, "--subset_gds_file", help="GDS file after subsetting")
+argp <- add_argument(argp, "--out_file", help="output file name")
 argp <- add_argument(argp, "--sample_include_file",
                      help="RData file with vector of sample.id to include")
 argp <- add_argument(argp, "--variant_include_file",
@@ -28,6 +28,6 @@ if (!is.na(argv$variant_include_file)) {
 }
 
 seqSetFilter(gds, sample.id=sample.id, variant.id=variant.id)
-seqExport(gds, argv$subset_gds_file, fmt.var=character(), info.var=character())
+seqExport(gds, argv$out_file, fmt.var=character(), info.var=character())
 
 seqClose(gds)

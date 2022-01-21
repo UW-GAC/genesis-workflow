@@ -3,6 +3,7 @@
         "class": "File",
         "path": "/tmp/1KG_phase3_subset_chr1.gds"
     },
+    "out_file": "test.RData",
     "autosome_only": "TRUE",
     "exclude_pca_corr": "TRUE",
     "genome_build", "hg19",
@@ -10,7 +11,6 @@
     "ld_win_size": 10,
     "maf_threshold": 0.01,
     "missing_threshold": 0.01,
-    "out_prefix": "test",
     "sample_include_file": {
         "class": "File",
         "path": "/tmp/sample_include.RData"

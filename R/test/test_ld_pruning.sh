@@ -12,7 +12,7 @@ R -q --vanilla --args \
   --ld_win_size 10 \
   --maf_threshold 0.01 \
   --missing_threshold 0.01 \
-  --out_prefix test \
+  --out_file test.RData \
   --sample_include_file $BASE_PATH/testdata/sample_include.RData \
   --variant_include_file $BASE_PATH/testdata/variant_include_chr1.RData \
   --chromosome 1 \
@@ -20,7 +20,7 @@ R -q --vanilla --args \
 
 cat ld_pruning.params
 
-R -q --vanilla --args test_pruned_variants.RData \
+R -q --vanilla --args test.RData \
   < $BASE_PATH/R/test/check_out_file.R
 
 # X chrom
@@ -33,10 +33,10 @@ R -q --vanilla --args \
   --ld_win_size 10 \
   --maf_threshold 0.01 \
   --missing_threshold 0.01 \
-  --out_prefix test \
+  --out_file test.RData \
   < $BASE_PATH/R/ld_pruning.R
 
 cat ld_pruning.params
 
-R -q --vanilla --args test_pruned_variants.RData \
+R -q --vanilla --args test.RData \
   < $BASE_PATH/R/test/check_out_file.R
