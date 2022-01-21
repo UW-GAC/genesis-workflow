@@ -19,7 +19,7 @@ inputs:
     prefix: --gds_file
     position: 1
     shellQuote: false
-  sbg:category: Input files
+  sbg:category: Input Files
   sbg:fileTypes: GDS
 - id: ld_r_threshold
   label: LD |r| threshold
@@ -39,7 +39,7 @@ inputs:
     prefix: --ld_win_size
     position: 3
     shellQuote: false
-  sbg:category: Input options
+  sbg:category: Input Options
   sbg:toolDefaultValue: '10'
 - id: maf_threshold
   label: MAF threshold
@@ -50,7 +50,7 @@ inputs:
     prefix: --maf_threshold
     position: 4
     shellQuote: false
-  sbg:category: Input options
+  sbg:category: Input Options
   sbg:toolDefaultValue: '0.01'
 - id: missing_threshold
   label: Missing call rate threshold
@@ -61,7 +61,7 @@ inputs:
     prefix: --missing_threshold
     position: 5
     shellQuote: false
-  sbg:category: Input options
+  sbg:category: Input Options
   sbg:toolDefaultValue: '0.01'
 - id: out_prefix
   label: Output prefix
@@ -110,7 +110,7 @@ inputs:
     prefix: --exclude_pca_corr
     position: 9
     shellQuote: false
-  sbg:category: Input options
+  sbg:category: Input Options
   sbg:toolDefaultValue: 'true'
 - id: genome_build
   label: Genome build
@@ -155,7 +155,7 @@ inputs:
     prefix: --autosome_only
     position: 21
     shellQuote: false
-  sbg:category: Input options
+  sbg:category: Input Options
   sbg:toolDefaultValue: 'true'
 
 outputs:
