@@ -1,0 +1,15 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_chr1.gds"
+    },
+    "out_file": "test.gds",
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_chr1.RData"
+    }
+}

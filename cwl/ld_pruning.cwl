@@ -24,7 +24,7 @@ inputs:
 - id: out_file
   label: Output filename
   doc: Name for output file.
-  type: string?
+  type: string
   inputBinding:
     prefix: --out_file
     position: 2

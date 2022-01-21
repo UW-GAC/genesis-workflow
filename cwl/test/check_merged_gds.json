@@ -1,0 +1,10 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_chr21.gds"
+    },
+    "merged_gds_file":  {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset.gds"
+    }
+}
