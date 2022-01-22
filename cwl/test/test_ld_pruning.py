@@ -90,8 +90,7 @@ class Platform(unittest.TestCase):
         cls.inputs['gds_file'] = cls.session.files.query(
             names=[
                 '1KG_phase3_subset_chr21.gds',
-                '1KG_phase3_subset_chr22.gds',
-                '1KG_phase3_subset_chrX.gds'
+                '1KG_phase3_subset_chr22.gds'
                 ],
             project=cls.project
         )
@@ -108,9 +107,9 @@ class Platform(unittest.TestCase):
         cls.inputs['ld_win_size'] = 10
         cls.inputs['maf_threshold'] = 0.01
         cls.inputs['missing_threshold'] = 0.01
-        cls.inputs['exclude_pca_corr'] = False
+        cls.inputs['exclude_pca_corr'] = 'FALSE'
         cls.inputs['genome_build'] = 'hg19'
-        cls.inputs['autosome_only'] = False
+        cls.inputs['autosome_only'] = 'FALSE'
         cls.log = logging.getLogger("#unit_test")
         cls.log.info(f" Starting {cls.APP} test")
         # RUN TASKS
@@ -148,7 +147,7 @@ class Platform(unittest.TestCase):
         wait(self.task)
         if self.task.status == 'COMPLETED':
             self.log.info(f" Checking {self.APP} output naming")
-            out_expected_name = 'unittest.gds'
+            out_expected_name = 'unittest_pruned.gds'
             out_name = self.task.outputs['pruned_gds_output'].name
             if out_name.startswith('_'):
                 self.assertEqual(out_expected_name, '_'.join(out_name.split('_')[2:]))
@@ -157,7 +156,7 @@ class Platform(unittest.TestCase):
                 
             # should have same number of pruned output files as input files
             self.assertEqual(len(self.task.outputs['ld_pruning_output']),
-                                 len(self.task.inputs['gds_file']))
+                             len(self.task.inputs['gds_file']))
             self.output_status = 'passed'
             self.log.info(f"#output_test {self.output_status}")
             

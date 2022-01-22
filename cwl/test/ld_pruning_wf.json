@@ -1,0 +1,32 @@
+{
+    "gds_file": [
+        {
+            "class": "File",
+            "path": "/tmp/1KG_phase3_subset_chr21.gds"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/1KG_phase3_subset_chr22.gds"
+        }
+    ],
+    "out_prefix": "test",
+    "autosome_only": "TRUE",
+    "exclude_pca_corr": "TRUE",
+    "genome_build", "hg19",
+    "ld_r_threshold": 0.32,
+    "ld_win_size": 10,
+    "maf_threshold": 0.01,
+    "missing_threshold": 0.01,
+    "sample_include_file_pruning": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "sample_include_file_gds": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_chr1.RData"
+    }
+}
