@@ -5,16 +5,22 @@ library(GENESIS)
 sessionInfo()
 
 argp <- arg_parser("Partition samples into related and unrelated sets")
-argp <- add_argument(argp, "--kinship_file", help="")
-argp <- add_argument(argp, "--divergence_file", help="")
+argp <- add_argument(argp, "--kinship_file", 
+                     help="File containing kinship matrix to use for defining unrelated samples")
+argp <- add_argument(argp, "--divergence_file", 
+                     help="File containing kinship matrix to use for ancestry divergence")
 argp <- add_argument(argp, "--kinship_threshold", default=0.04419417, 
-                     help="2^(-9/2), 3rd degree")
+                     help="Minimum kinship for assigning relatives, default 2^(-9/2), 3rd degree")
 argp <- add_argument(argp, "--divergence_threshold", default=-0.04419417, 
-                     help="2^(-9/2), 3rd degree")
-argp <- add_argument(argp, "--out_prefix", default="samples", help="")
-argp <- add_argument(argp, "--phenotype_file", help="")
-argp <- add_argument(argp, "--sample_include_file", help="")
-argp <- add_argument(argp, "--group", help="")
+                     help="Minimum kinship for ancestry divergence, default 2^(-9/2), 3rd degree")
+argp <- add_argument(argp, "--out_prefix", default="samples", 
+                     help="prefix for output files")
+argp <- add_argument(argp, "--phenotype_file", 
+                     help="RData file with sample.id and group columns")
+argp <- add_argument(argp, "--sample_include_file", 
+                     help="RData file with vector of sample.id to include")
+argp <- add_argument(argp, "--group", 
+                     help="Name of column in phenotype_file with group indicator")
 argv <- parse_args(argp)
 writeParams(argv, "find_unrelated.params")
 

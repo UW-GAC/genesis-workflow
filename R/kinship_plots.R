@@ -11,13 +11,19 @@ library(hexbin)
 sessionInfo()
 
 argp <- arg_parser("Kinship plots")
-argp <- add_argument(argp, "--kinship_file", help="")
-argp <- add_argument(argp, "--kinship_method", default="king", help="")
-argp <- add_argument(argp, "--kinship_threshold", default=0.04419417, help="2^(-9/2), 3rd degree")
-argp <- add_argument(argp, "--out_prefix", default="kinship", help="")
-argp <- add_argument(argp, "--phenotype_file", help="")
-argp <- add_argument(argp, "--sample_include_file", help="")
-argp <- add_argument(argp, "--group", help="")
+argp <- add_argument(argp, "--kinship_file", help="file with kinship estimates")
+argp <- add_argument(argp, "--kinship_method", default="king_ibdseg", 
+                     help="method used to generate kinship estimates")
+argp <- add_argument(argp, "--kinship_threshold", default=0.04419417, 
+                     help="threshold for king_robust results, default 2^(-9/2), 3rd degree")
+argp <- add_argument(argp, "--out_prefix", default="kinship", 
+                     help="prefix for output files")
+argp <- add_argument(argp, "--sample_include_file", 
+                     help="RData file with vector of sample.id to include")
+argp <- add_argument(argp, "--phenotype_file", 
+                     help="RData file with sample.id and group columns")
+argp <- add_argument(argp, "--group", 
+                     help="Name of column in phenotype_file with group indicator")
 argv <- parse_args(argp)
 writeParams(argv, "kinship_plots.params")
 
@@ -29,7 +35,6 @@ if (!is.na(argv$sample_include_file)) {
 
 ## select type of kinship estimates to use (king or pcrelate)
 kin.type <- tolower(argv$kinship_method)
-kin.thresh <- as.numeric(argv$kinship_threshold)
 if (kin.type == "king_ibdseg") {
     kinship <- read_tsv(argv$kinship_file, col_types="-c-c--nnn-") %>%
         mutate(IBS0=(1 - IBD1Seg - IBD2Seg), kinship=0.5*PropIBD)
@@ -45,11 +50,11 @@ if (kin.type == "king_ibdseg") {
 } else if (kin.type == "king_robust") {
     if (tools::file_ext(argv$kinship_file) == "gds") {
         king <- gds2ibdobj(argv$kinship_file, sample.id=sample.id)
-        kinship <- snpgdsIBDSelection(king, kinship.cutoff=kin.thresh)
+        kinship <- snpgdsIBDSelection(king, kinship.cutoff=argv$kinship_threshold)
     } else {
         king <- getobj(argv$kinship_file)
         samp.sel <- if (is.null(sample.id)) NULL else king$sample.id %in% sample.id
-        kinship <- snpgdsIBDSelection(king, kinship.cutoff=kin.thresh, samp.sel=samp.sel)
+        kinship <- snpgdsIBDSelection(king, kinship.cutoff=argv$kinship_threshold, samp.sel=samp.sel)
     }
     xvar <- "IBS0"
     rm(king)

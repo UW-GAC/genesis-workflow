@@ -4,11 +4,16 @@ library(GENESIS)
 sessionInfo()
 
 argp <- arg_parser("Format KING results as Matrix")
-argp <- add_argument(argp, "--king_file", help="")
-argp <- add_argument(argp, "--out_file", default="king_Matrix.RData", help="")
-argp <- add_argument(argp, "--kinship_method", default="king_ibdseg", help="")
-argp <- add_argument(argp, "--sparse_threshold", default=0.01104854, help="2^(-13/2), 5th degree")
-argp <- add_argument(argp, "--sample_include_file", help="")
+argp <- add_argument(argp, "--king_file", 
+                     help="file with KING output")
+argp <- add_argument(argp, "--out_file", default="king_Matrix.RData", 
+                     help="output file name")
+argp <- add_argument(argp, "--kinship_method", default="king_ibdseg", 
+                     help="KING algorithm used")
+argp <- add_argument(argp, "--sparse_threshold", default=0.01104854, 
+                     help="threshold for sparsity, default 2^(-13/2), 5th degree")
+argp <- add_argument(argp, "--sample_include_file", 
+                     help="RData file with vector of sample.id to include")
 argv <- parse_args(argp)
 writeParams(argv, "king_to_matrix.params")
 
@@ -35,6 +40,5 @@ mat <- kingToMatrix(king=argv$king_file,
                     estimator=estimator,
                     sample.include=sample.id,
                     thresh=kin.thresh)
-
 
 save(mat, file=argv$out_file)

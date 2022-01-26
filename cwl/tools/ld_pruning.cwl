@@ -50,7 +50,7 @@ inputs:
 - id: exclude_pca_corr
   label: Exclude PCA corr
   doc: |-
-    Exclude variants in genomic regions known to result in high PC-variant correlations when included (HLA, LCT, inversions).
+    Exclude variants in genomic regions known to result in high PC-variant correlations (HLA, LCT, inversions).
   type:
   - 'null'
   - name: exclude_pca_corr
