@@ -17,10 +17,14 @@ inputs:
   doc: Input GDS files, one per chromosome.
   type: File[]
   sbg:fileTypes: GDS
+  sbg:x: -440.613037109375
+  sbg:y: 21.550386428833008
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
   type: string
+  sbg:x: -535.4487915039062
+  sbg:y: -42.224388122558594
 - id: autosome_only
   label: Autosomes only
   doc: Only include variants on the autosomes.
@@ -92,18 +96,24 @@ inputs:
     RData file with vector of sample.id to use for LD pruning (unrelated samples are recommended). If not provided, all samples in the GDS files are included.
   type: File?
   sbg:fileTypes: RDATA
+  sbg:x: -482.9205627441406
+  sbg:y: -174.98597717285156
 - id: sample_include_file_gds
   label: Sample include file for output GDS
   doc: |-
     RData file with vector of sample.id to include in the output GDS. If not provided, all samples in the GDS files are included.
   type: File?
   sbg:fileTypes: RDATA
+  sbg:x: -258.4799499511719
+  sbg:y: 59.013526916503906
 - id: variant_include_file
   label: Variant Include file for LD pruning
   doc: |-
     RData file with vector of variant.id to consider for LD pruning. If not provided, all variants in the GDS files are included.
   type: File?
   sbg:fileTypes: RDATA
+  sbg:x: -426.8399658203125
+  sbg:y: -303.2926025390625
 - id: chromosome
   label: Chromosome
   doc: |-
@@ -120,6 +130,8 @@ outputs:
   outputSource:
   - merge_gds/merged_gds_output
   sbg:fileTypes: GDS
+  sbg:x: 510.43572998046875
+  sbg:y: -266.7860412597656
 - id: ld_pruning_output
   label: Pruned variant output file
   doc: RData file with variant.id of pruned variants.
@@ -127,6 +139,8 @@ outputs:
   outputSource:
   - ld_pruning/ld_pruning_output
   sbg:fileTypes: RDATA
+  sbg:x: -61.60548782348633
+  sbg:y: -287.0057373046875
 
 steps:
 - id: ld_pruning
