@@ -6,7 +6,8 @@ sessionInfo()
 
 argp <- arg_parser("LD pruning")
 argp <- add_argument(argp, "--gds_file", help="GDS file")
-argp <- add_argument(argp, "--out_file", help="output file name")
+argp <- add_argument(argp, "--out_file", default="pruned_variants.RData",
+                     help="output file name")
 argp <- add_argument(argp, "--autosome_only", default=TRUE,
                      help="Only include autosomes")
 argp <- add_argument(argp, "--exclude_pca_corr", default=TRUE,
