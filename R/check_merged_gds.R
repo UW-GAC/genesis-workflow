@@ -32,6 +32,9 @@ seqClose(gds_merge)
 
 
 # check
-stopifnot(hash_merge == hash_chr)
+check <- hash_merge == hash_chr
+outfile <- "check_merged.txt"
+if (check) writeLines("PASS", outfile) else writeLines("FAIL", outfile)
+stopifnot(check)
 
 message("MD5 checking [OK]\n")
