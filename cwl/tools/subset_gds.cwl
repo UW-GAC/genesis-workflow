@@ -57,7 +57,7 @@ outputs:
 - id: subset_gds_output
   label: Subset file
   doc: GDS file with subset of variants from original file
-  type: File?
+  type: File
   outputBinding:
     glob: '*.gds'
   sbg:fileTypes: GDS

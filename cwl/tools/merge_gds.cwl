@@ -35,7 +35,7 @@ outputs:
 - id: merged_gds_output
   label: Merged GDS output file
   doc: GDS output file
-  type: File?
+  type: File
   outputBinding:
     glob: '*.gds'
   sbg:fileTypes: GDS

@@ -27,6 +27,6 @@
     },
     "variant_include_file": {
         "class": "File",
-        "path": "/tmp/variant_include_chr1.RData"
+        "path": "/tmp/variant_include_pruned.RData"
     }
 }

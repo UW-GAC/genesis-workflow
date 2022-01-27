@@ -162,7 +162,7 @@ outputs:
 - id: ld_pruning_output
   label: Pruned output file
   doc: RData file with variant.id of pruned variants.
-  type: File?
+  type: File
   outputBinding:
     glob: '*.RData'
   sbg:fileTypes: RDATA

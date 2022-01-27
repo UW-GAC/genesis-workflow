@@ -13,7 +13,7 @@ requirements:
 inputs:
 - id: gds_file
   label: GDS File
-  doc: Base reference file for comparison.
+  doc: A GDS file that was merged with others to create merged_gds_file.
   type: File
   inputBinding:
     prefix: --gds_file
@@ -24,7 +24,8 @@ inputs:
 - id: merged_gds_file
   label: Merged GDS file
   doc: |-
-    Output of merge_gds script. This file is being checked against starting gds file.
+    Output of merge_gds workflow. The genotypes for one chromosome of 
+    merged_gds_file are checked against the corresponding chromosome in gds_file.
   type: File
   inputBinding:
     prefix: --merged_gds_file
@@ -33,7 +34,20 @@ inputs:
   sbg:category: Input Files
   sbg:fileTypes: GDS
 
-outputs: []
+outputs:
+- id: check_merged_output
+  label: Check indicator
+  doc: |- 
+    PASS/FAIL indicator for whether contents of gds_file match the corresponding 
+    chromosome in merged_gds_file.
+  type: string
+  outputBinding:
+    glob: 'check_merged.txt'
+    loadContents: true
+    outputEval: |-
+      ${ 
+        return self[0].contents.trim()
+      }
 stdout: job.out.log
 stderr: job.err.log
 

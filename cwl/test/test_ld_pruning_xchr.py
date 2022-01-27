@@ -89,17 +89,12 @@ class Platform(unittest.TestCase):
         cls.project = cls.session.projects.get(id=cls.project_name)
         cls.inputs['gds_file'] = cls.session.files.query(
             names=[
-                '1KG_phase3_subset_chr21.gds',
-                '1KG_phase3_subset_chr22.gds'
+                '1KG_phase3_subset.gds'
                 ],
             project=cls.project
         )
-        cls.inputs['sample_include_file_pruning'] = cls.session.files.query(
-            names=['sample_include.RData'],
-            project=cls.project
-        )[0]
-        cls.inputs['sample_include_file_gds'] = cls.session.files.query(
-            names=['sample_include.RData'],
+        cls.inputs['variant_include_file'] = cls.session.files.query(
+            names=['variant_include_chrX.RData'],
             project=cls.project
         )[0]
         cls.inputs['out_prefix'] = 'unittest'
@@ -109,7 +104,8 @@ class Platform(unittest.TestCase):
         cls.inputs['missing_threshold'] = 0.01
         cls.inputs['exclude_pca_corr'] = 'FALSE'
         cls.inputs['genome_build'] = 'hg19'
-        cls.inputs['autosome_only'] = 'TRUE'
+        cls.inputs['autosome_only'] = 'FALSE'
+        cls.inputs['chromosome'] = 'X'
         cls.log = logging.getLogger("#unit_test")
         cls.log.info(f" Starting {cls.APP} test")
         # RUN TASKS

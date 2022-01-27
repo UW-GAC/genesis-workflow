@@ -2,7 +2,34 @@ cwlVersion: v1.2
 class: Workflow
 label: LD Pruning
 doc: |-
-  This workflow LD prunes variants and creates a new GDS file containing only the pruned variants. Linkage disequilibrium (LD) is a measure of correlation of genotypes between a pair of variants. LD-pruning is the process filtering variants so that those that remain have LD measures below a given threshold. This procedure is typically used to identify a (nearly) independent subset of variants. This is often the first step in evaluating relatedness and population structure to avoid having results driven by clusters of variants in high LD regions of the genome.
+  This workflow prunes variants to a subset not in linkage disequilibrium (LD) with each other
+  and creates a new GDS file containing only the independent variants.
+
+  LD is a measure of correlation of genotypes between a pair of variants. The pruning process
+  filters variants so that those that remain have LD measures below a 
+  given threshold. This procedure is typically used to identify a (nearly) independent subset of 
+  variants. This is often the first step in evaluating relatedness and population structure to avoid 
+  having results driven by clusters of variants in high LD regions of the genome.
+
+  Recommended usage is to provide separate GDS files for each chromosome, in which case the workflow
+  will scatter over the GDS files. Each file will be subset to only the pruned variants, then the
+  subset files will be merged into a single output file with pruned variants from all chromosomes.
+  A subsequent step verifies that the merge was performed correctly.
+  If a single file is provided, the merge step will be skipped. In this case, variants from only
+  one chromosome may be selected using the 'chromosome' input parameter. 'Chromosome' should not
+  be specified when running on multiple files.
+
+  A set of variants to be considered for pruning may be provided.
+  Only one file is allowed as input, but it may contain all variant.ids for the
+  combined set of input GDS files.
+
+  There are two inputs for samples to include in the workflow. One set of sample IDs is used for
+  the pruning step, and it is recommended to only include unrelated samples in this set
+  if relationships are previously known. A different set of samples may be specified for
+  inclusion in the output GDS file.
+
+  In addition to the pruned GDS file, the workflow outputs RData files with vectors of variant.id
+  identifying the pruned variants in each of the input GDS files. 
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -17,14 +44,14 @@ inputs:
   doc: Input GDS files, one per chromosome.
   type: File[]
   sbg:fileTypes: GDS
-  sbg:x: -440.613037109375
-  sbg:y: 21.550386428833008
+  sbg:x: -440
+  sbg:y: 21
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
   type: string
-  sbg:x: -535.4487915039062
-  sbg:y: -42.224388122558594
+  sbg:x: -535
+  sbg:y: -42
 - id: autosome_only
   label: Autosomes only
   doc: Only include variants on the autosomes.
@@ -96,24 +123,24 @@ inputs:
     RData file with vector of sample.id to use for LD pruning (unrelated samples are recommended). If not provided, all samples in the GDS files are included.
   type: File?
   sbg:fileTypes: RDATA
-  sbg:x: -482.9205627441406
-  sbg:y: -174.98597717285156
+  sbg:x: -482
+  sbg:y: -175
 - id: sample_include_file_gds
   label: Sample include file for output GDS
   doc: |-
     RData file with vector of sample.id to include in the output GDS. If not provided, all samples in the GDS files are included.
   type: File?
   sbg:fileTypes: RDATA
-  sbg:x: -258.4799499511719
-  sbg:y: 59.013526916503906
+  sbg:x: -258
+  sbg:y: 59
 - id: variant_include_file
   label: Variant Include file for LD pruning
   doc: |-
     RData file with vector of variant.id to consider for LD pruning. If not provided, all variants in the GDS files are included.
   type: File?
   sbg:fileTypes: RDATA
-  sbg:x: -426.8399658203125
-  sbg:y: -303.2926025390625
+  sbg:x: -427
+  sbg:y: -303
 - id: chromosome
   label: Chromosome
   doc: |-
@@ -126,21 +153,32 @@ outputs:
   label: Pruned GDS output file
   doc: |-
     GDS output file containing sample genotypes at pruned variants from all chromosomes.
-  type: File?
+  type: File
   outputSource:
   - merge_gds/merged_gds_output
+  - subset_gds/subset_gds_output
+  pickValue: first_non_null
   sbg:fileTypes: GDS
-  sbg:x: 510.43572998046875
-  sbg:y: -266.7860412597656
+  sbg:x: 351
+  sbg:y: -214
 - id: ld_pruning_output
   label: Pruned variant output file
   doc: RData file with variant.id of pruned variants.
-  type: File?
+  type: File[]
   outputSource:
   - ld_pruning/ld_pruning_output
   sbg:fileTypes: RDATA
-  sbg:x: -61.60548782348633
-  sbg:y: -287.0057373046875
+  sbg:x: -61
+  sbg:y: -287
+- id: check_merged_output
+  label: Results of check
+  doc: |-
+    PASS/FAIL indicator for whether contents of gds_file match the corresponding chromosome in merged_gds_file.
+  type: string[]?
+  outputSource:
+  - check_merged_gds/check_merged_output
+  sbg:x: 531
+  sbg:y: -33
 
 steps:
 - id: ld_pruning
@@ -179,6 +217,8 @@ steps:
   run: tools/ld_pruning.cwl
   out:
   - id: ld_pruning_output
+  sbg:x: -259
+  sbg:y: -159
 
 - id: subset_gds
   label: subset_gds
@@ -186,9 +226,10 @@ steps:
   - id: gds_file
     source: gds_file
   - id: out_file
+    source: out_prefix
     valueFrom: |-
       ${
-        return inputs.gds_file.nameroot + '_pruned.gds'
+        return self + '_' + inputs.gds_file.nameroot + '_pruned.gds'
       }
   - id: sample_include_file
     source: sample_include_file_gds
@@ -201,6 +242,8 @@ steps:
   run: tools/subset_gds.cwl
   out:
   - id: subset_gds_output
+  sbg:x: -72
+  sbg:y: -48
 
 - id: merge_gds
   label: merge_gds
@@ -215,8 +258,11 @@ steps:
         return self + '_pruned.gds'
       }
   run: tools/merge_gds.cwl
+  when: ${return inputs.gds_file.length > 1}
   out:
   - id: merged_gds_output
+  sbg:x: 133
+  sbg:y: -150
 
 - id: check_merged_gds
   label: check_merged_gds
@@ -228,7 +274,11 @@ steps:
   scatter:
   - gds_file
   run: tools/check_merged_gds.cwl
-  out: []
+  when: ${return inputs.merged_gds_file != null}
+  out:
+  - id: check_merged_output
+  sbg:x: 353
+  sbg:y: -33
 
 sbg:categories:
 - GWAS
