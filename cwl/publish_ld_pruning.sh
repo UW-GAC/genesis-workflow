@@ -9,6 +9,7 @@ sbpack bdc smgogarten/genesis-relatedness/ld-pruning-pipeline ld-pruning-wf.cwl
 
 # test
 python3 test/test_ld_pruning.py
+python3 test/test_ld_pruning_xchr.py
 
 # push to pre-build project
 sbpack bdc smgogarten/genesis-relatedness-pre-build/ld-pruning tools/ld_pruning.cwl
