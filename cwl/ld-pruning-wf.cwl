@@ -154,9 +154,9 @@ outputs:
   doc: |-
     GDS output file containing sample genotypes at pruned variants from all chromosomes.
   type: File
-  outputSource:
-  - merge_gds/merged_gds_output
-  - subset_gds/subset_gds_output
+  outputSource: # this fails validation in cwltool, but works on SBG
+  - merge_gds/merged_gds_output # single file output
+  - subset_gds/subset_gds_output # scattered file array output (but if merge is null, result will be a single file)
   pickValue: first_non_null
   sbg:fileTypes: GDS
   sbg:x: 351
