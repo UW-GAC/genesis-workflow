@@ -62,7 +62,7 @@ inputs:
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
-  type: string?
+  type: string
   sbg:x: -429
   sbg:y: -223
 - id: phenotype_file
@@ -169,6 +169,10 @@ steps:
   - id: cpu
     source: cpu
   - id: out_prefix
+    valueFrom: |-
+      ${
+        return self + '_king_ibdseg'
+      }
     source: out_prefix
   run: tools/king_ibdseg.cwl
   out:

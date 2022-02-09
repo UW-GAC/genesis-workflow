@@ -49,13 +49,12 @@ inputs:
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
-  type: string?
+  type: string
   inputBinding:
     prefix: --out_prefix
     position: 5
     shellQuote: false
   sbg:category: Input Options
-  sbg:toolDefaultValue: kinship
 - id: sample_include_file
   label: Sample Include File
   doc: RData file with vector of sample.id to include. If not provided, all samples are included.

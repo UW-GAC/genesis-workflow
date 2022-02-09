@@ -49,21 +49,12 @@ inputs:
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
-  type: string?
+  type: string
   inputBinding:
     prefix: --prefix
     position: 5
-    valueFrom: |-
-      ${
-          if (inputs.out_prefix) 
-              return inputs.out_prefix
-          } else {
-              return "king_ibdseg"
-          }
-      }
     shellQuote: false
   sbg:category: Input Options
-  sbg:toolDefaultValue: king_ibdseg
 
 outputs:
 - id: king_ibdseg_output

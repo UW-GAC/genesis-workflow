@@ -56,7 +56,7 @@ inputs:
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
-  type: string?
+  type: string
   sbg:x: -397
   sbg:y: 1
 - id: phenotype_file
