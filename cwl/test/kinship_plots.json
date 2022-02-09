@@ -1,0 +1,14 @@
+{
+    "kinship_file": {
+        "class": "File",
+        "path": "/tmp/hapmap3_king_ibdseg.seg"
+    },
+    "out_prefix": "test",
+    "kinship_method": "king_ibdseg",
+    "kinship_plot_threshold": 0.044,
+    "phenotype_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_annot.RData"
+    },
+    "group": "Population"
+}

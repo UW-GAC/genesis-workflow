@@ -1,0 +1,9 @@
+{
+    "king_file": {
+        "class": "File",
+        "path": "/tmp/hapmap3_king_ibdseg.seg"
+    },
+    "out_file": "test.RData",
+    "kinship_method": "king_ibdseg",
+    "sparse_threshold": 0.022
+}

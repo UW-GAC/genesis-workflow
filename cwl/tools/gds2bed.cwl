@@ -1,6 +1,6 @@
 cwlVersion: v1.2
 class: CommandLineTool
-label: subset_gds
+label: gds2bed
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -12,7 +12,7 @@ requirements:
 
 inputs:
 - id: gds_file
-  label: GDS file
+  label: GDS File
   doc: Input GDS file.
   type: File
   inputBinding:
@@ -23,8 +23,8 @@ inputs:
   sbg:fileTypes: GDS
 - id: out_file
   label: Output filename
-  doc: Name for output file.
-  type: string
+  doc: Base name for output file. If not provided, will be the same as the GDS file.
+  type: string? 
   inputBinding:
     prefix: --out_file
     position: 2
@@ -45,7 +45,7 @@ inputs:
   label: Variant include file
   doc: |-
     RData file with vector of variant.id to include. All variants in the GDS files are used when not provided.
-  type: File
+  type: File?
   inputBinding:
     prefix: --variant_include_file
     position: 11
@@ -54,13 +54,18 @@ inputs:
   sbg:fileTypes: RDATA
 
 outputs:
-- id: subset_gds_output
-  label: Subset file
-  doc: GDS file with subset of variants from original file
+- id: bed_file
+  label: BED file
+  doc: BED generated from GDS file
   type: File
+  secondaryFiles:
+  - pattern: ^.bim
+    required: true
+  - pattern: ^.fam
+    required: true
   outputBinding:
-    glob: '*.gds'
-  sbg:fileTypes: GDS
+    glob: '*.bed'
+  sbg:fileTypes: BED
 stdout: job.out.log
 stderr: job.err.log
 
@@ -72,7 +77,7 @@ baseCommand:
 arguments:
 - prefix: <
   position: 100
-  valueFrom: /usr/local/genesis-workflow/R/subset_gds.R
+  valueFrom: /usr/local/genesis-workflow/R/gds2bed.R
   shellQuote: false
 
 hints:

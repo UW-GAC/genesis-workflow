@@ -182,6 +182,6 @@ arguments:
 
 hints:
 - class: sbg:SaveLogs
-  value: "*.params"
+  value: '*.params'
 - class: sbg:SaveLogs
-  value: "*.log"
+  value: '*.log'

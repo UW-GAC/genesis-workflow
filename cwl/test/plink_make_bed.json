@@ -1,0 +1,6 @@
+{
+    "bed_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.bed"
+    }
+}
