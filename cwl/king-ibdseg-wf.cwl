@@ -13,12 +13,17 @@ doc: |-
 
   The workflow first converts the GDS file to PLINK BED format, followed by formatting the BED
   file using PLINK. Both these steps are required to create an input file accepted by KING.
+  Note that GDS files containing multi-allelic variants will fail to convert, which is another
+  reason to use LD pruned files.
   
   KING returns a file with pairwise relationships listed in rows with a '.seg' extension.
   A subsequent workflow step creates a block-diagonal Matrix object in R, with values for
   pairs outside of family blocks set to zero. The threshold for sparsity may be set by the user.
   This format represents a huge savings in storage and computation time for subsequent analyses
   over a dense matrix.
+
+  A file of sample.id is required to ensure that all desired samples are represented in the 
+  output matrix, even if no pairwise IBD segments were detected for those samples.
 
   The final output of the workflow is a plot of kinship estimates vs IBS0, which gives
   on overview of the amount of relatedness in the dataset. Only pairs above the specified
@@ -59,12 +64,6 @@ inputs:
   sbg:fileTypes: RDATA
   sbg:x: -554
   sbg:y: -59
-- id: out_prefix
-  label: Output prefix
-  doc: Prefix for output files; will have "_king_ibdseg" appended.
-  type: string
-  sbg:x: -429
-  sbg:y: -223
 - id: phenotype_file
   label: Phenotype File
   doc: |-
@@ -73,6 +72,19 @@ inputs:
   sbg:fileTypes: RDATA
   sbg:x: 128
   sbg:y: -225
+- id: out_prefix
+  label: Output prefix
+  doc: Prefix for output files; will have "_king_ibdseg" appended.
+  type: string
+  sbg:x: -429
+  sbg:y: -223
+- id: sparse_threshold
+  label: Sparse threshold
+  doc: |-
+    Threshold for making the output kinship matrix sparse. A block diagonal matrix will be created such that any pair of samples with a kinship estimate greater than the threshold is in the same block; all pairwise estimates within a block are kept, and pairwise estimates between blocks are set to 0.
+  type: float?
+  sbg:exposed: true
+  sbg:toolDefaultValue: 2^(-11/2) (~0.022, 4th degree)
 - id: kinship_plot_threshold
   label: Kinship plotting threshold
   doc: Minimum kinship for a pair to be included in the plot.
@@ -85,13 +97,6 @@ inputs:
     Name of column in phenotype_file containing group variable (e.g., study) for plotting.
   type: string?
   sbg:exposed: true
-- id: sparse_threshold
-  label: Sparse threshold
-  doc: |-
-    Threshold for making the output kinship matrix sparse. A block diagonal matrix will be created such that any pair of samples with a kinship estimate greater than the threshold is in the same block; all pairwise estimates within a block are kept, and pairwise estimates between blocks are set to 0.
-  type: float?
-  sbg:exposed: true
-  sbg:toolDefaultValue: 2^(-11/2) (~0.022, 4th degree)
 - id: cpu
   label: Number of CPUs
   doc: Number of CPUs to use.
@@ -100,6 +105,21 @@ inputs:
   sbg:toolDefaultValue: '4'
 
 outputs:
+- id: king_ibdseg_output
+  label: KING ibdseg output
+  doc: |-
+    Text file with pairwise kinship estimates for all sample pairs with any detected IBD segments.
+  type: File
+  secondaryFiles:
+  - pattern: ^.segments.gz
+    required: false
+  - pattern: ^allsegs.txt
+    required: false
+  outputSource:
+  - king_ibdseg/king_ibdseg_output
+  sbg:fileTypes: SEG
+  sbg:x: 684
+  sbg:y: 10
 - id: king_ibdseg_matrix
   label: Kinship matrix
   doc: |-
@@ -120,21 +140,6 @@ outputs:
   sbg:fileTypes: PDF
   sbg:x: 681
   sbg:y: -158
-- id: king_ibdseg_output
-  label: KING ibdseg output
-  doc: |-
-    Text file with pairwise kinship estimates for all sample pairs with any detected IBD segments.
-  type: File
-  secondaryFiles:
-  - pattern: ^.segments.gz
-    required: false
-  - pattern: ^allsegs.txt
-    required: false
-  outputSource:
-  - king_ibdseg/king_ibdseg_output
-  sbg:fileTypes: SEG
-  sbg:x: 684
-  sbg:y: 10
 
 steps:
 - id: gds2bed

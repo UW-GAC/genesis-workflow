@@ -53,12 +53,6 @@ inputs:
   sbg:fileTypes: RDATA
   sbg:x: -294
   sbg:y: -242
-- id: out_prefix
-  label: Output prefix
-  doc: Prefix for output files; will have "_king_robust" appended.
-  type: string
-  sbg:x: -397
-  sbg:y: 1
 - id: phenotype_file
   label: Phenotype File
   doc: |-
@@ -67,6 +61,12 @@ inputs:
   sbg:fileTypes: RDATA
   sbg:x: -117
   sbg:y: 117
+- id: out_prefix
+  label: Output prefix
+  doc: Prefix for output files; will have "_king_robust" appended.
+  type: string
+  sbg:x: -397
+  sbg:y: 1
 - id: kinship_plot_threshold
   label: Kinship plotting threshold
   doc: Minimum kinship for a pair to be included in the plot.

@@ -46,6 +46,30 @@ inputs:
   sbg:fileTypes: GDS
   sbg:x: -440
   sbg:y: 21
+- id: sample_include_file_pruning
+  label: Sample Include file for LD pruning
+  doc: |-
+    RData file with vector of sample.id to use for LD pruning (unrelated samples are recommended). If not provided, all samples in the GDS files are included.
+  type: File?
+  sbg:fileTypes: RDATA
+  sbg:x: -482
+  sbg:y: -175
+- id: sample_include_file_gds
+  label: Sample include file for output GDS
+  doc: |-
+    RData file with vector of sample.id to include in the output GDS. If not provided, all samples in the GDS files are included.
+  type: File?
+  sbg:fileTypes: RDATA
+  sbg:x: -258
+  sbg:y: 59
+- id: variant_include_file
+  label: Variant Include file for LD pruning
+  doc: |-
+    RData file with vector of variant.id to consider for LD pruning. If not provided, all variants in the GDS files are included.
+  type: File?
+  sbg:fileTypes: RDATA
+  sbg:x: -427
+  sbg:y: -303
 - id: out_prefix
   label: Output prefix
   doc: Prefix for output files.
@@ -117,30 +141,6 @@ inputs:
   type: float?
   sbg:exposed: true
   sbg:toolDefaultValue: '0.01'
-- id: sample_include_file_pruning
-  label: Sample Include file for LD pruning
-  doc: |-
-    RData file with vector of sample.id to use for LD pruning (unrelated samples are recommended). If not provided, all samples in the GDS files are included.
-  type: File?
-  sbg:fileTypes: RDATA
-  sbg:x: -482
-  sbg:y: -175
-- id: sample_include_file_gds
-  label: Sample include file for output GDS
-  doc: |-
-    RData file with vector of sample.id to include in the output GDS. If not provided, all samples in the GDS files are included.
-  type: File?
-  sbg:fileTypes: RDATA
-  sbg:x: -258
-  sbg:y: 59
-- id: variant_include_file
-  label: Variant Include file for LD pruning
-  doc: |-
-    RData file with vector of variant.id to consider for LD pruning. If not provided, all variants in the GDS files are included.
-  type: File?
-  sbg:fileTypes: RDATA
-  sbg:x: -427
-  sbg:y: -303
 - id: chromosome
   label: Chromosome
   doc: |-
