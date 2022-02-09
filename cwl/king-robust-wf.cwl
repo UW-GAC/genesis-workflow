@@ -55,7 +55,7 @@ inputs:
   sbg:y: -242
 - id: out_prefix
   label: Output prefix
-  doc: Prefix for output files.
+  doc: Prefix for output files; will have "_king_robust" appended.
   type: string
   sbg:x: -397
   sbg:y: 1
