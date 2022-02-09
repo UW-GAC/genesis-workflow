@@ -2,7 +2,32 @@ cwlVersion: v1.2
 class: Workflow
 label: KING IBDseg
 doc: |-
-  This workflow uses the KING --ibdseg method to estimate kinship coefficients, and returns results for pairs of related samples. These kinship estimates can be used as measures of kinship in PC-AiR.
+  This workflow uses the KING --ibdseg method to estimate kinship coefficients, and returns 
+  results for pairs of related samples. These kinship estimates can be used as measures of 
+  kinship in PC-AiR.
+
+  Recommended usage is to provide the pruned GDS file from the LD pruning workflow as input.
+  Additional variant filtering may be done by providing a file of variant.id to include.
+  Note that the variant ids in the LD pruned GDS file may be different than the ids in the
+  per-chromosome GDS files used as input to the LD pruning workflow.
+
+  The workflow first converts the GDS file to PLINK BED format, followed by formatting the BED
+  file using PLINK. Both these steps are required to create an input file accepted by KING.
+  
+  KING returns a file with pairwise relationships listed in rows with a '.seg' extension.
+  A subsequent workflow step creates a block-diagonal Matrix object in R, with values for
+  pairs outside of family blocks set to zero. The threshold for sparsity may be set by the user.
+  This format represents a huge savings in storage and computation time for subsequent analyses
+  over a dense matrix.
+
+  The final output of the workflow is a plot of kinship estimates vs IBS0, which gives
+  on overview of the amount of relatedness in the dataset. Only pairs above the specified
+  kinship plot threshold are displayed. Since many analyses include multiple
+  cohorts, a phenotype file may be provided to identify cohorts or groups for plotting separately.
+  The phenotype file should be in RDATA format and contain a data.frame or AnnotatedDataFrame. 
+  Columns must include sample.id and a group variable, with the name of
+  the group column specified as a separate argument. If these inputs are provided, additional
+  plots will be created showing kinship separately within each group and across groups.
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -21,7 +46,7 @@ inputs:
 - id: sample_include_file
   label: Sample Include file
   doc: |-
-    RData file with vector of sample.id to include.
+    RData file with vector of sample.id to include. If not provided, all samples in the GDS file are included.
   type: File
   sbg:fileTypes: RDATA
   sbg:x: -539

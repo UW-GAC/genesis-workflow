@@ -1,0 +1,22 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "out_prefix": "test",
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_pruned.RData"
+    },
+    "kinship_plot_threshold": 0.044,
+    "phenotype_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_annot.RData"
+    },
+    "group": "Population",
+    "cpu": 2
+}

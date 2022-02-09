@@ -9,12 +9,9 @@ requirements:
 - class: ResourceRequirement
   coresMin: |-
     ${
-        if (inputs.cpu)
-        {
+        if (inputs.cpu) {
             return inputs.cpu
-        }
-        else
-        {
+        } else {
             return 4
         }
         
@@ -58,12 +55,9 @@ inputs:
     position: 5
     valueFrom: |-
       ${
-          if (inputs.out_prefix)
-          {
+          if (inputs.out_prefix) 
               return inputs.out_prefix
-          }
-          else
-          {
+          } else {
               return "king_ibdseg"
           }
       }
@@ -86,6 +80,7 @@ outputs:
     glob: '*.seg'
   sbg:fileTypes: SEG
 stdout: job.out.log
+stderr: job.err.log
 
 baseCommand:
 - king 
