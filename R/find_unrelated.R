@@ -15,10 +15,10 @@ argp <- add_argument(argp, "--divergence_threshold", default=-0.04419417,
                      help="Minimum kinship for ancestry divergence, default 2^(-9/2), 3rd degree")
 argp <- add_argument(argp, "--out_prefix", default="samples", 
                      help="prefix for output files")
-argp <- add_argument(argp, "--phenotype_file", 
-                     help="RData file with sample.id and group columns")
 argp <- add_argument(argp, "--sample_include_file", 
                      help="RData file with vector of sample.id to include")
+argp <- add_argument(argp, "--phenotype_file", 
+                     help="RData file with sample.id and group columns")
 argp <- add_argument(argp, "--group", 
                      help="Name of column in phenotype_file with group indicator")
 argv <- parse_args(argp)
