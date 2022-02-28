@@ -4,6 +4,7 @@ BASE_PATH=$1
 
 R -q --vanilla --args \
   --kinship_file $BASE_PATH/testdata/1KG_king_ibdseg_Matrix.RData \
+  --divergence_file $BASE_PATH/testdata/1KG_king_robust.gds \
   --kinship_threshold 0.04419417 \
   --divergence_threshold -0.04419417 \
   --out_prefix "test" \

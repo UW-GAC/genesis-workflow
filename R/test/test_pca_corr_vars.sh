@@ -5,7 +5,7 @@ BASE_PATH=$1
 # single chromosome file
 R -q --vanilla --args \
   --gds_file $BASE_PATH/testdata/1KG_phase3_subset_chr1.gds \
-  --pca_file $BASE_PATH/testdata/1KG_pcair.RData \
+  --pca_file $BASE_PATH/testdata/1KG_pcair_unrel.RData \
   --n_corr_vars 1e6 \
   --out_file test_1.RData \
   --corr_maf_threshold 0.01 \
@@ -20,7 +20,7 @@ R -q --vanilla --args test_1.RData \
 # all chromosomes file with argument
 R -q --vanilla --args \
   --gds_file $BASE_PATH/testdata/1KG_phase3_subset_pruned.gds \
-  --pca_file $BASE_PATH/testdata/1KG_pcair.RData \
+  --pca_file $BASE_PATH/testdata/1KG_pcair_unrel.RData \
   --n_corr_vars 1e6 \
   --out_file test_all.RData \
   --corr_maf_threshold 0.01 \
@@ -36,7 +36,7 @@ R -q --vanilla --args test_all.RData \
 # add variants
 R -q --vanilla --args \
   --gds_file $BASE_PATH/testdata/1KG_phase3_subset_pruned.gds \
-  --pca_file $BASE_PATH/testdata/1KG_pcair.RData \
+  --pca_file $BASE_PATH/testdata/1KG_pcair_unrel.RData \
   --n_corr_vars 1e6 \
   --out_file test_vars.RData \
   --variant_include_file $BASE_PATH/testdata/variant_include_chr1.RData \

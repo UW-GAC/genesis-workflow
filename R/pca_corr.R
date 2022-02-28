@@ -8,7 +8,7 @@ sessionInfo()
 argp <- arg_parser("Correlation of variants with PCs")
 argp <- add_argument(argp, "--gds_file", help="GDS file")
 argp <- add_argument(argp, "--pca_file", 
-                     help="RData file with pcair object")
+                     help="RData file with snpgdsPCAClass object")
 argp <- add_argument(argp, "--n_pcs", default=32, type="integer",
                      help="number of PCs to return")
 argp <- add_argument(argp, "--out_file", default="pca_corr_variants.RData",

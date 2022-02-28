@@ -6,7 +6,7 @@ sessionInfo()
 argp <- arg_parser("Select variants for correlation with PCs")
 argp <- add_argument(argp, "--gds_file", help="GDS file")
 argp <- add_argument(argp, "--pca_file", 
-                     help="RData file with pcair object")
+                     help="RData file with snpgdsPCAClass object")
 argp <- add_argument(argp, "--n_corr_vars", default=10e6,
                      help="number of variants to sample across the genome")
 argp <- add_argument(argp, "--out_file", default="pca_corr_variants.RData",
@@ -38,8 +38,7 @@ filterBySNV(gds)
 
 # Use only the samples included in PCA.
 pca <- getobj(argv$pca_file)
-sample_include <- c(pca$rels, pca$unrels)
-seqSetFilter(gds, sample.id = sample_include)
+seqSetFilter(gds, sample.id = pca$sample.id)
 
 # Filter by MAF and missing rate
 seqSetFilterCond(gds,
