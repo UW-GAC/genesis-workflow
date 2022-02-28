@@ -1,0 +1,60 @@
+{
+    "out_prefix": "test",
+    "cpu": 2,
+    "kinship_file": {
+        "class": "File",
+        "path": "/tmp/1KG_king_ibdseg_Matrix.RData"
+    },
+    "divergence_file": {
+        "class": "File",
+        "path": "/tmp/1KG_king_robust.gds"
+    },
+    "kinship_threshold": 0.044,
+    "divergence_threshold": -0.044,
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "phenotype_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_annot.RData"
+    },
+    "group": "Population",
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_pruned.RData"
+    },
+    "n_pairs": 4,
+    "gds_file_full": [
+        {
+            "class": "File",
+            "path": "/tmp/1KG_phase3_subset_chr1.gds"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/1KG_phase3_subset_chr2.gds"
+        }
+    ],
+    "pruned_variant_file": [
+        {
+            "class": "File",
+            "path": "/tmp/variant_include_chr1.RData"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/variant_include_chr2.RData"
+        }
+    ],
+    "n_corr_vars": 1000000,
+    "corr_maf_threshold": 0.01,
+    "corr_missing_threshold": 0.05,
+    "n_pcs_corr": 16,
+    "n_pcs_plot": 8,
+    "n_perpage": 4,
+    "thin": "TRUE",
+    "run_correlation": true
+}

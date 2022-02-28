@@ -1,0 +1,13 @@
+{
+    "out_prefix": "test",
+    "cpu": 2,
+    "kinship_file": {
+        "class": "File",
+        "path": "/tmp/1KG_king_ibdseg_Matrix.RData"
+    },
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "run_correlation": false
+}

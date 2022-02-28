@@ -1,0 +1,35 @@
+{
+    "gds_file_full": [
+        {
+            "class": "File",
+            "path": "/tmp/1KG_phase3_subset_chr1.gds"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/1KG_phase3_subset_chr2.gds"
+        }
+    ],
+    "variant_include_file": [
+        {
+            "class": "File",
+            "path": "/tmp/variant_include_chr1.RData"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/variant_include_chr2.RData"
+        }
+    ],
+    "pca_file": {
+        "class": "File",
+        "path": "/tmp/1KG_pcair_unrel.RData"
+    },
+    "out_prefix": "test",
+    "n_corr_vars": 1000000,
+    "corr_maf_threshold": 0.01,
+    "corr_missing_threshold": 0.05,
+    "n_pcs_corr": 16,
+    "cpu": 2,
+    "n_pcs_plot": 8,
+    "n_perpage": 4,
+    "thin": "TRUE"
+}

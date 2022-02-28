@@ -1,6 +1,6 @@
 cwlVersion: v1.2
 class: CommandLineTool
-label: king_robust
+label: pca_corr
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -21,8 +21,8 @@ requirements:
 
 inputs:
 - id: gds_file
-  label: GDS file
-  doc: Input GDS file.
+  label: GDS File
+  doc: Input GDS file
   type: File
   inputBinding:
     prefix: --gds_file
@@ -30,39 +30,57 @@ inputs:
     shellQuote: false
   sbg:category: Input Files
   sbg:fileTypes: GDS
+- id: variant_include_file
+  label: Variant include file
+  doc: |-
+    RData file with vector of variant.id to include. If not provided, all variants in the GDS file are included.
+  type: File?
+  inputBinding:
+    prefix: --variant_include_file
+    position: 11
+    shellQuote: false
+  sbg:category: Input Options
+  sbg:fileTypes: RDATA
+- id: pca_file
+  label: PCA file
+  doc: RData file with PCA results for unrelated samples
+  type: File
+  inputBinding:
+    prefix: --pca_file
+    position: 2
+    shellQuote: false
+  sbg:fileTypes: RDATA
+- id: n_pcs_corr
+  label: Number of PCs
+  doc: Number of PCs (Principal Components) to use for PC-variant correlation
+  type: int?
+  default: 32
+  inputBinding:
+    prefix: --n_pcs
+    position: 4
+    shellQuote: false
+  sbg:category: Input Options
+  sbg:toolDefaultValue: '32'
 - id: out_file
   label: Output filename
   doc: Name for output file.
   type: string
   inputBinding:
     prefix: --out_file
-    position: 2
+    position: 3
     shellQuote: false
   sbg:category: Input Options
-- id: sample_include_file
-  label: Sample Include file
-  doc: |-
-    RData file with vector of sample.id to include. If not provided, all samples in the GDS file are included.
-  type: File?
+- id: chromosome
+  label: Chromosome
+  doc: Chromosome
+  type: string?
   inputBinding:
-    prefix: --sample_include_file
-    position: 10
+    prefix: --chromosome
+    position: 12
     shellQuote: false
-  sbg:category: Input Files
-  sbg:fileTypes: RDATA
-- id: variant_include_file
-  label: Variant Include file
-  doc: |-
-    RData file with vector of variant.id to use for kinship estimation. If not provided, all variants in the GDS file are included.
-  type: File?
-  inputBinding:
-    prefix: --variant_include_file
-    position: 11
-    shellQuote: false
-  sbg:category: Input Files
-  sbg:fileTypes: RDATA
+  sbg:category: Input Options
 - id: cpu
-  label: Number of CPUs
+  label: cpu
   doc: Number of CPUs to use.
   type: int?
   default: 4
@@ -70,13 +88,11 @@ inputs:
     prefix: --num_cores
     position: 20
     shellQuote: false
-  sbg:category: Input Options
-  sbg:toolDefaultValue: '4'
 
 outputs:
-- id: king_robust_output
-  label: KING robust output
-  doc: GDS file with matrix of pairwise kinship estimates.
+- id: pca_corr_gds
+  label: PC-SNP correlation
+  doc: GDS file with PC-SNP correlation results
   type: File
   outputBinding:
     glob: '*.gds'
@@ -92,7 +108,7 @@ baseCommand:
 arguments:
 - prefix: <
   position: 100
-  valueFrom: /usr/local/genesis-workflow/R/ibd_king.R
+  valueFrom: /usr/local/genesis-workflow/R/pca_corr.R
   shellQuote: false
 
 hints:

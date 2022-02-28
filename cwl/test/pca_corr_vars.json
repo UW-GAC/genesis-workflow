@@ -1,0 +1,15 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "pca_file": {
+        "class": "File",
+        "path": "/tmp/1KG_pcair_unrel.RData"
+    },
+    "out_file": "test.RData",
+    "n_corr_vars": 1000000,
+    "corr_maf_threshold": 0.01,
+    "corr_missing_threshold": 0.05,
+    "chromosome": "1"
+}

@@ -1,0 +1,22 @@
+{
+    "kinship_file": {
+        "class": "File",
+        "path": "/tmp/1KG_king_ibdseg_Matrix.RData"
+    },
+    "divergence_file": {
+        "class": "File",
+        "path": "/tmp/1KG_king_robust.gds"
+    },
+    "out_prefix": "test",
+    "kinship_threshold": 0.044,
+    "divergence_threshold": -0.044,
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "phenotype_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_annot.RData"
+    },
+    "group": "Population"
+}

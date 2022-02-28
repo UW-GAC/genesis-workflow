@@ -1,0 +1,17 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "pca_file": {
+        "class": "File",
+        "path": "/tmp/1KG_pcair_unrel.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_chr1.RData"
+    },
+    "out_file": "test.gds",
+    "n_pcs_corr": 16,
+    "cpu": 2
+}

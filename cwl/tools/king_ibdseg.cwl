@@ -14,7 +14,6 @@ requirements:
         } else {
             return 4
         }
-        
     }
 - class: DockerRequirement
   dockerPull: uwgac/genesis-workflow:3.0.0

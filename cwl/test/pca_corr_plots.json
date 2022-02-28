@@ -1,0 +1,16 @@
+{
+    "corr_file": [
+    {
+        "class": "File",
+        "path": "/tmp/1KG_pca_corr_chr1.gds"
+    },
+    {
+        "class": "File",
+        "path": "/tmp/1KG_pca_corr_chr2.gds"
+    }
+    ],
+    "out_prefix": "test",
+    "n_pcs_plot": 8,
+    "n_perpage": 4,
+    "thin": "TRUE"
+}

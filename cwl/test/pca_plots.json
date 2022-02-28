@@ -1,0 +1,13 @@
+{
+    "pca_file": {
+        "class": "File",
+        "path": "/tmp/1KG_pcair.RData"
+    },
+    "out_prefix": "test",
+    "n_pairs": 4,
+    "phenotype_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_annot.RData"
+    },
+    "group": "Population"
+}

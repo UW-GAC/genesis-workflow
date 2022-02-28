@@ -1,0 +1,24 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "out_prefix": "test",
+    "related_file": {
+        "class": "File",
+        "path": "/tmp/1KG_related.RData"
+    },
+    "unrelated_file": {
+        "class": "File",
+        "path": "/tmp/1KG_unrelated.RData"
+    },
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_pruned.RData"
+    },
+    "cpu": 2
+}
