@@ -2,9 +2,54 @@ cwlVersion: v1.2
 class: Workflow
 label: PC-AiR
 doc: |-
-  This workflow uses the PC-AiR algorithm to compute ancestry principal components (PCs) while accounting for kinship.
+  This workflow uses the PC-AiR algorithm to compute ancestry principal components (PCs) 
+  while accounting for kinship.
 
-  Step 1 uses pairwise kinship estimates to assign samples to an unrelated set that is representative of all ancestries in the sample. Step 2 performs Principal Component Analysis (PCA) on the unrelated set, then projects relatives onto the resulting set of PCs. Step 3 plots the PCs, optionally color-coding by a grouping variable. Step 4 (optional) calculates the correlation between each PC and variants in the dataset, then plots this correlation to allow screening for PCs that are driven by particular genomic regions.
+  Step 1 uses pairwise kinship estimates to assign samples to an unrelated set that is 
+  representative of all ancestries in the sample. Step 2 performs Principal Component 
+  Analysis (PCA) on the unrelated set, then projects relatives onto the resulting set of 
+  PCs. Step 3 plots the PCs, optionally color-coding by a grouping variable. Step 4 
+  (optional) calculates the correlation between each PC and variants in the dataset, 
+  then plots this correlation to allow screening for PCs that are driven by particular 
+  genomic regions.
+
+  To identify the unrelated set, the user supplies a pairwise kinship matrix. For large
+  sample sizes, it is recommended to use the sparse Matrix object output by the 
+  KING-IBDseg workflow. The default threshold considers 3rd-degree and closer relative pairs
+  to be 'related', but this threshold may be changed by the user. Optionally, a dense
+  matrix from the KING-robust workflow may be provided as the divergence matrix, which allows
+  the algorithm to identify an optimal related set representing the most diversity in
+  ancestry. Only KING-robust kinship estimates have the negative values required to identify
+  ancestry divergence, so other kinship estimates are not suitable for this parameter.
+  Including this file is helpful for smaller sample sizes, but for very large sample sizes,
+  the computational burden is considerable and the improvement in sample selection is
+  minimal.
+
+  In some isolated populations, the median kinship value may be elevated. In a large study
+  containing both isolated and general populations, using the same kinship threshold for
+  all pairs in the study may not be appropriate. If a phenotype file with a 'group'
+  column identifying population for each sample is provided, the algorithm will identify
+  groups with elevated overall kinship and adjust the kinship threshold for pairs of
+  samples within those groups as necessary.
+
+  The GDS file supplied for calculating principal components should be LD pruned to
+  independent variants with the LD-pruning workflow. One file containing all chromosomes
+  is required.
+
+  To calculate the correlation between variants and PCs, set the 'run correlation'
+  parameter to TRUE. This option requires two additional inputs; full GDS files 
+  containing all variants, and RData files containing the variant IDs for LD-pruned 
+  variants (output by the LD-pruning workflow). Each of these inputs is an array of
+  files by chromosome, and the workflow scatters over each GDS/variant file pair.
+  The set of variants used in the corrlelation is a random sample of variants from
+  the full GDS file, along with the entire set of pruned variants. The random sample
+  is taken to reduce computation time.
+
+  The workflow has several outputs; 1) RData files with vectors of unrelated and
+  related sample ids, 2) RData file with a 'pcair' object containing PCs for all 
+  samples, 3) plots showing PCs, color-coded by group if a phenotype file was
+  provided, 4) (optionally) GDS files containing PC-variant correlation values,
+  5) (optionally) plots showing PC-variant correlation.
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -95,7 +140,7 @@ inputs:
 - id: group
   label: Group
   doc: |-
-    Name of column in phenotype_file containing group variable for color-coding plots.
+    Name of column in phenotype_file containing group variable.
   type: string?
   sbg:exposed: true
 - id: run_correlation
@@ -147,7 +192,7 @@ inputs:
   sbg:exposed: true
 - id: thin_corr_plots
   label: Thin PC-variant correlation plots
-  doc: Thin points in PC-variant correlation plots
+  doc: Thin points in PC-variant correlation plots to reduce time to create the plots
   type:
   - 'null'
   - name: thin
@@ -186,7 +231,8 @@ outputs:
   sbg:x: -20
   sbg:y: -170
 - id: pcair_output
-  label: RData file with PC-AiR PCs for all samples
+  label: PC-AiR PCs
+  doc: RData file with PC-AiR PCs for all samples
   type: File
   outputSource:
   - pca_byrel/pcair_output
