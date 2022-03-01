@@ -14,30 +14,30 @@ inputs:
   label: Output prefix
   doc: Prefix for output files.
   type: string
-  sbg:x: -58
-  sbg:y: 30
+  sbg:x: -15
+  sbg:y: 210
 - id: gds_file_full
   label: Full GDS Files
   doc: GDS files (one per chromosome) used to calculate PC-variant correlations.
   type: File[]
   sbg:fileTypes: GDS
-  sbg:x: -25
-  sbg:y: 187
+  sbg:x: 4
+  sbg:y: 343
 - id: variant_include_file
   label: Variant include file
   doc: |-
     RData files (one per chromosome) with vector of variant.id to include. These variants will be added to the set of randomly selected variants. It is recommended to provide the set of pruned variants used for PCA.
   type: File[]
   sbg:fileTypes: RDATA
-  sbg:x: -106
-  sbg:y: -85
+  sbg:x: 5
+  sbg:y: -62
 - id: pca_file
   label: PCA file
   doc: RData file with PCA results for unrelated samples
   type: File
   sbg:fileTypes: RDATA
-  sbg:x: 11
-  sbg:y: -188
+  sbg:x: -3
+  sbg:y: 78
 - id: n_corr_vars
   label: Number of variants to select
   doc: |-
@@ -81,6 +81,7 @@ inputs:
   doc: Number of CPUs to use.
   type: int?
   sbg:toolDefaultValue: '4'
+  sbg:exposed: true
 
 outputs:
 - id: pc_correlation_plots
@@ -90,8 +91,8 @@ outputs:
   outputSource:
   - pca_corr_plots/pca_corr_plots
   sbg:fileTypes: PNG
-  sbg:x: 679
-  sbg:y: -9
+  sbg:x: 858
+  sbg:y: 89
 - id: pca_corr_gds
   label: PC-variant correlation
   doc: GDS file with PC-variant correlation results
@@ -99,8 +100,8 @@ outputs:
   outputSource:
   - pca_corr/pca_corr_gds
   sbg:fileTypes: GDS
-  sbg:x: 581
-  sbg:y: 159
+  sbg:x: 767
+  sbg:y: 265
 
 steps:
 - id: pca_corr_vars
@@ -127,8 +128,8 @@ steps:
   run: tools/pca_corr_vars.cwl
   out:
   - id: pca_corr_vars
-  sbg:x: 121
-  sbg:y: -8
+  sbg:x: 224
+  sbg:y: 39
 - id: pca_corr
   label: pca_corr
   in:
@@ -155,8 +156,8 @@ steps:
   run: tools/pca_corr.cwl
   out:
   - id: pca_corr_gds
-  sbg:x: 350
-  sbg:y: 30
+  sbg:x: 435
+  sbg:y: 151
 - id: pca_corr_plots
   label: pca_corr_plots
   in:
@@ -176,5 +177,5 @@ steps:
   run: tools/pca_corr_plots.cwl
   out:
   - id: pca_corr_plots
-  sbg:x: 489
-  sbg:y: -117
+  sbg:x: 633
+  sbg:y: 29

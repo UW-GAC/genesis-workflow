@@ -18,24 +18,23 @@ inputs:
   label: Output prefix
   doc: Prefix for output files.
   type: string
-  sbg:x: -665
-  sbg:y: 56
+  sbg:exposed: true
 - id: kinship_file
   label: Kinship File
   doc: |-
     Pairwise kinship matrix used to identify unrelated and related sets of samples in Step 1. It is recommended to use KING-IBDseg or PC-Relate estimates.
   type: File
   sbg:fileTypes: RDATA, GDS
-  sbg:x: -566
-  sbg:y: 182
+  sbg:x: -590
+  sbg:y: 68
 - id: divergence_file
   label: Divergence File
   doc: |-
     Pairwise matrix used to identify ancestrally divergent pairs of samples in Step 1. It is recommended to use KING-robust estimates.
   type: File?
   sbg:fileTypes: RDATA, GDS
-  sbg:x: -590
-  sbg:y: 319
+  sbg:x: -575
+  sbg:y: 207
 - id: gds_file
   label: Pruned GDS File
   doc: |-
@@ -50,24 +49,24 @@ inputs:
     RData file with vector of sample.id to include. If not provided, all samples in the GDS file are included.
   type: File?
   sbg:fileTypes: RDATA
-  sbg:x: -628
-  sbg:y: -77
+  sbg:x: -591
+  sbg:y: -74
 - id: variant_include_file
   label: Variant include file
   doc: |-
     RData file with vector of variant.id to include. If not provided, all variants in the GDS file are included.
   type: File?
   sbg:fileTypes: RDATA
-  sbg:x: -537
-  sbg:y: -221
+  sbg:x: -345
+  sbg:y: -246
 - id: phenotype_file
   label: Phenotype file
   doc: |-
     RData file with data.frame or AnnotatedDataFrame of phenotypes. Used for color-coding PCA plots by group.
   type: File?
   sbg:fileTypes: RDATA
-  sbg:x: -14
-  sbg:y: -274
+  sbg:x: -538
+  sbg:y: -214
 - id: kinship_threshold
   label: Kinship threshold
   doc: Minimum kinship estimate to use for identifying relatives.
@@ -86,14 +85,13 @@ inputs:
   doc: Number of PCs (Principal Components) to return.
   type: int?
   sbg:toolDefaultValue: '32'
-  sbg:x: -427
-  sbg:y: -333
+  sbg:exposed: true
 - id: n_pairs
   label: Number of PCs
   doc: Number of PCs to include in the pairs plot.
   type: int?
-  sbg:exposed: true
   sbg:toolDefaultValue: '6'
+  sbg:exposed: true
 - id: group
   label: Group
   doc: |-
@@ -105,23 +103,22 @@ inputs:
   doc: |-
     For pruned variants as well as a random sample of additional variants, compute correlation between the variants and PCs, and generate plots. This step can be computationally intensive, but is useful for verifying that PCs are not driven by small regions of the genome.
   type: boolean
-  sbg:x: -405
-  sbg:y: 275
+  sbg:exposed: true
 - id: gds_file_full
   label: Full GDS Files
   doc: GDS files (one per chromosome) used to calculate PC-variant correlations.
   type: File[]?
   sbg:fileTypes: GDS
-  sbg:x: -283
-  sbg:y: 376
+  sbg:x: -313
+  sbg:y: 304
 - id: pruned_variant_file
   label: Pruned variant files
   doc: |-
     RData files (one per chromosome) with vector of variant.id produced by the LD pruning workflow. These variants will be added to the set of randomly selected variants.
   type: File[]?
   sbg:fileTypes: RDATA
-  sbg:x: -241
-  sbg:y: 195
+  sbg:x: -213
+  sbg:y: 189
 - id: n_corr_vars
   label: Number of variants to select
   doc: |-
@@ -165,8 +162,7 @@ inputs:
   doc: Number of CPUs to use.
   type: int?
   sbg:toolDefaultValue: '4'
-  sbg:x: -427
-  sbg:y: -333
+  sbg:exposed: true
 
 
 outputs:
@@ -177,8 +173,8 @@ outputs:
   outputSource:
   - find_unrelated/out_unrelated_file
   sbg:fileTypes: RDATA
-  sbg:x: -223
-  sbg:y: -296
+  sbg:x: -110
+  sbg:y: -279
 - id: out_related_file
   label: Related file
   doc: |-
@@ -187,8 +183,8 @@ outputs:
   outputSource:
   - find_unrelated/out_related_file
   sbg:fileTypes: RDATA
-  sbg:x: -200
-  sbg:y: -189
+  sbg:x: -20
+  sbg:y: -170
 - id: pcair_output
   label: RData file with PC-AiR PCs for all samples
   type: File
@@ -238,6 +234,10 @@ steps:
     source: divergence_threshold
   - id: sample_include_file
     source: sample_include_file
+  - id: phenotype_file
+    source: phenotype_file
+  - id: group
+    source: group
   - id: out_prefix
     source: out_prefix
   run: tools/find_unrelated.cwl

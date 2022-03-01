@@ -74,8 +74,7 @@ inputs:
   label: Output prefix
   doc: Prefix for output files.
   type: string
-  sbg:x: -535
-  sbg:y: -42
+  sbg:exposed: true
 - id: autosome_only
   label: Autosomes only
   doc: Only include variants on the autosomes.

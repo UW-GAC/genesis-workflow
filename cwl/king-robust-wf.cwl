@@ -65,8 +65,7 @@ inputs:
   label: Output prefix
   doc: Prefix for output files; will have "_king_robust" appended.
   type: string
-  sbg:x: -397
-  sbg:y: 1
+  sbg:exposed: true
 - id: kinship_plot_threshold
   label: Kinship plotting threshold
   doc: Minimum kinship for a pair to be included in the plot.

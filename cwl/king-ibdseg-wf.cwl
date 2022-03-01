@@ -76,8 +76,7 @@ inputs:
   label: Output prefix
   doc: Prefix for output files; will have "_king_ibdseg" appended.
   type: string
-  sbg:x: -429
-  sbg:y: -223
+  sbg:exposed: true
 - id: sparse_threshold
   label: Sparse threshold
   doc: |-
