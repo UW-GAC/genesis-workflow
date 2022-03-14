@@ -31,6 +31,7 @@ sbpull bdc smgogarten/genesis-relatedness-pre-build/pca-corr-plots tools/pca_cor
 
 # push workflow to pre-build
 sbpack bdc smgogarten/genesis-relatedness-pre-build/pc-variant-correlation pc_variant_correlation.cwl
+sbpull bdc smgogarten/genesis-relatedness-pre-build/pc-variant-correlation pc_variant_correlation.cwl --unpack
 sbpack bdc smgogarten/genesis-relatedness-pre-build/pc-air pc-air-wf.cwl
 
 # push workflow to commit
