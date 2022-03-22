@@ -1,0 +1,20 @@
+{
+    "pcrelate_block_files": [
+        {
+            "class": "File",
+            "path": "/tmp/1KG_pcrelate_block_1_1.RData"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/1KG_pcrelate_block_1_2.RData"
+        },
+        {
+            "class": "File",
+            "path": "/tmp/1KG_pcrelate_block_2_2.RData"
+        }
+    ],
+    "pcrelate_prefix": "/tmp/1KG_pcrelate",
+    "out_prefix": "test",
+    "sparse_threshold": 0.044,
+    "n_sample_blocks": 2
+}

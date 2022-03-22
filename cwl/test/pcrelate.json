@@ -1,0 +1,30 @@
+{
+    "gds_file": {
+        "class": "File",
+        "path": "/tmp/1KG_phase3_subset_pruned.gds"
+    },
+    "pca_file": {
+        "class": "File",
+        "path": "/tmp/1KG_pcair.RData"
+    },
+    "beta_file": {
+        "class": "File",
+        "path": "/tmp/1KG_pcrelate_beta.RData"
+    },
+    "out_prefix": "test",
+    "n_pcs": 3,
+    "ibd_probs": "TRUE",
+    "sample_include_file": {
+        "class": "File",
+        "path": "/tmp/sample_include.RData"
+    },
+    "variant_include_file": {
+        "class": "File",
+        "path": "/tmp/variant_include_pruned.RData"
+    },
+    "cpu": 1,
+    "variant_block_size": 3000,
+    "n_sample_blocks": 2,
+    "sample_block_1": 2,
+    "sample_block_2": 2
+}

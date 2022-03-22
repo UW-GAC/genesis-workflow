@@ -4,9 +4,10 @@ library(GENESIS)
 sessionInfo()
 
 argp <- arg_parser("PC-Relate")
-argp <- add_argument(argp, "--pcrelate_prefix", help="prefix for pcrelate sample block files")
+argp <- add_argument(argp, "--pcrelate_prefix", 
+                     help="prefix for pcrelate sample block files (filenames must have suffix '_block_i_j.RData')")
 argp <- add_argument(argp, "--out_prefix", default="pcrelate",
-                     help="prefix for output files (filenames must have suffix '_block_i_j.RData')")
+                     help="prefix for output files")
 argp <- add_argument(argp, "--sparse_threshold", default=0.02209709, 
                      help="Minimum kinship to use for creating the sparse matrix default is 4th deg")
 argp <- add_argument(argp, "--n_sample_blocks", default=1, type="integer", 
