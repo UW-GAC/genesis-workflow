@@ -40,7 +40,7 @@ inputs:
     prefix: --variant_include_file
     position: 11
     shellQuote: false
-  sbg:category: Input Options
+  sbg:category: Input Files
   sbg:fileTypes: RDATA
 - id: out_file
   label: Output filename
