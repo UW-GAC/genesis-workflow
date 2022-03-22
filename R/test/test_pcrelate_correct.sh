@@ -11,8 +11,8 @@ R -q --vanilla --args \
 
 cat pcrelate_correct.params
 
-R -q --vanilla --args test_pcrelate.RData \
+R -q --vanilla --args test.RData \
   < $BASE_PATH/R/test/check_out_file.R
 
-R -q --vanilla --args test_pcrelate_Matrix.RData \
+R -q --vanilla --args test_Matrix.RData \
   < $BASE_PATH/R/test/check_out_file.R

@@ -59,4 +59,4 @@ rm(kinBtwn, kinSelf); gc()
    
 # save sparse kinship matrix
 km <- pcrelateToMatrix(pcrelobj, thresh = 2*kin.thresh, scaleKin = 2)
-save(km, file=paste0(argv$out_prefix, "Matrix.RData"))
+save(km, file=paste0(argv$out_prefix, "_Matrix.RData"))
