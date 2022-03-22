@@ -12,7 +12,7 @@ argp <- add_argument(argp, "--beta_file",
                      help="file with output from pcrelate_beta")
 argp <- add_argument(argp, "--n_pcs", default=3, type="integer",
                      help="number of PCs to use in adjusting for ancestry")
-argp <- add_argument(argp, "--out_prefix", default="pca", 
+argp <- add_argument(argp, "--out_prefix", default="pcrelate", 
                      help="prefix for output files")
 argp <- add_argument(argp, "--sample_include_file",
                      help="RData file with vector of sample.id to include")
