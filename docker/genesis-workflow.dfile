@@ -1,5 +1,7 @@
 FROM uwgac/genesis:2.24.0
 
+RUN Rscript -e 'remotes::install_github("UW-GAC/GENESIS", dependencies=FALSE)'
+
 USER root
 RUN cd /usr/local  && \
     git clone https://github.com/UW-GAC/genesis-workflow.git && \
