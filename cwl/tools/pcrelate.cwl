@@ -148,8 +148,8 @@ inputs:
 outputs:
 - id: pcrelate
   label: PC-Relate results
-  doc: RData files with PC-Relate results for each sample block.
-  type: File[]
+  doc: RData files with PC-Relate results for this sample block.
+  type: File
   outputBinding:
     glob: '*.RData'
   sbg:fileTypes: RDATA
