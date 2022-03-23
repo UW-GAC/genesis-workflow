@@ -6,15 +6,6 @@ $namespaces:
 
 requirements:
 - class: ShellCommandRequirement
-- class: ResourceRequirement
-  coresMin: |-
-    ${
-        if (inputs.cpu) {
-            return inputs.cpu
-        } else {
-            return 4
-        }
-    }
 - class: DockerRequirement
   dockerPull: uwgac/genesis-workflow:3.0.0
 - class: InlineJavascriptRequirement
@@ -80,17 +71,6 @@ inputs:
     shellQuote: false
   sbg:category: Input Options
   sbg:toolDefaultValue: '3'
-- id: cpu
-  label: cpu
-  doc: Number of CPUs to use.
-  type: int?
-  default: 4
-  inputBinding:
-    prefix: --num_cores
-    position: 20
-    shellQuote: false
-  sbg:category: Input Options
-  sbg:toolDefaultValue: '4'
 - id: variant_block_size
   label: Variant block size
   doc: Number of variants to read in a single block.
