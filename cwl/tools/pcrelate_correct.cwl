@@ -18,9 +18,10 @@ inputs:
   inputBinding:
     prefix: --pcrelate_prefix
     position: 1
+    shellQuote: false
     valueFrom: |-
       ${
-        return self[0].path.split("_block_")[0]
+        return self[0].nameroot.split("_block_")[0]
       }
   sbg:category: Input Files
   sbg:fileTypes: RDATA
@@ -82,12 +83,23 @@ outputs:
 stdout: job.out.log
 stderr: job.err.log
 
-baseCommand:
-- R
-- -q 
-- --vanilla
-- --args
+baseCommand: []
 arguments:
+- prefix: ''
+  position: 0
+  valueFrom: |-
+    ${
+        var cmd_line = ""
+        for (var i=0; i<inputs.pcrelate_block_files.length; i++) {
+          cmd_line += "ln -s " + inputs.pcrelate_block_files[i].path + " " + inputs.pcrelate_block_files[i].basename + " && "
+        }
+        return cmd_line
+    }
+  shellQuote: false
+- prefix: ''
+  position: 1
+  valueFrom: R -q --vanilla --args
+  shellQuote: false
 - prefix: <
   position: 100
   valueFrom: /usr/local/genesis-workflow/R/pcrelate_correct.R
