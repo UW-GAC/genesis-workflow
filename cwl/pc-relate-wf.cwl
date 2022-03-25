@@ -73,14 +73,9 @@ inputs:
 - id: ibd_probs
   label: Return IBD probabilities?
   doc: |-
-    Set this to FALSE to skip computing pairwise IBD probabilities (k0, k1, k2). If FALSE, the plottng step is also skipped, as it requires values for k0.
-  type: 
-  - 'null'
-  - name: thin
-    type: enum
-    symbols:
-    - "TRUE"
-    - "FALSE"
+    Set this to FALSE to skip computing pairwise IBD probabilities (k0, k1, k2). If FALSE, the plotting step is also skipped, as it requires values for k0.
+  type: boolean?
+  default: true
   sbg:toolDefaultValue: 'true'
   sbg:exposed: true
 - id: kinship_plot_threshold
@@ -200,6 +195,14 @@ steps:
   - id: n_sample_blocks
     source: n_sample_blocks
   - id: ibd_probs
+    valueFrom: |-
+      ${
+        if (self) {
+          return "TRUE"
+        } else {
+          return "FALSE"
+        }
+      }
     source: ibd_probs
   - id: sample_block_1
     source: sample_blocks/sample_block_1
@@ -259,14 +262,6 @@ steps:
     source: out_prefix
   - id: run_plots
     source: ibd_probs
-    valueFrom: |-
-      ${
-        if (self == "FALSE") {
-          return false
-        } else {
-          return true
-        }
-      }
   run: tools/kinship_plots.cwl
   when: $(inputs.run_plots)
   out:
