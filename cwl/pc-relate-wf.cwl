@@ -42,8 +42,6 @@ doc: |-
   Setting 'ibd_probs' to False with skip computing the IBD probabilities k0 and k1. This
   saves some computation time, but the kinship plots are not generated.
 $namespaces:
-
-$namespaces:
   sbg: https://sevenbridges.com
 
 requirements:
