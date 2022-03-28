@@ -83,7 +83,7 @@ inputs:
     Threshold for making the output kinship matrix sparse. A block diagonal matrix will be created such that any pair of samples with a kinship estimate greater than the threshold is in the same block; all pairwise estimates within a block are kept, and pairwise estimates between blocks are set to 0.
   type: float?
   sbg:exposed: true
-  sbg:toolDefaultValue: 2^(-11/2) (~0.022, 4th degree)
+  sbg:toolDefaultValue: 2^(-11/2) (fourth-degree relatives and closer)
 - id: kinship_plot_threshold
   label: Kinship plotting threshold
   doc: Minimum kinship for a pair to be included in the plot.

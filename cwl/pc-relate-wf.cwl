@@ -2,7 +2,47 @@ cwlVersion: v1.2
 class: Workflow
 label: PC-Relate
 doc: |-
-  This workflow estimates kinship and IBD sharing probabilities between all pairs of samples using the PC-Relate method, which accounts for population structure by conditioning on ancestry PCs.
+  This workflow estimates kinship and IBD sharing probabilities between all pairs of 
+  samples using the PC-Relate method, which accounts for population structure by 
+  conditioning on ancestry PCs.
+
+  Recommended usage is to provide the pruned GDS file from the LD pruning workflow as input.
+  Additional variant filtering may be done by providing a file of variant.id to include.
+  Note that the variant ids in the LD pruned GDS file may be different than the ids in the
+  per-chromosome GDS files used as input to the LD pruning workflow.
+
+  The PCA input should be the output of the PC-AiR workflow, a 'pcair' object stored in
+  an RData file. It is recommended to view PC plots prior to selecting the number of PCs
+  to include in the analysis; as only the number of PCs which are informative about distant
+  ancestry should be included.
+
+  For large sample sizes, the workflow may be parallelized by setting the number of sample
+  blocks to be > 1. Pairwise kinship for each combination of sample blocks is then calculated in
+  a separate job, and results are combined in the subsequent step. The variant block size 
+  controls how many variants are read from the GDS file at one time. Adjusting both sample
+  and variant blocks controls the size of the matrix used for computation in each iteration
+  of the algorithm, and may be tuned for maximum performance.
+
+  The output of the workflow is a 'pcrelate' object with data frames containing pairwise 
+  kinship estimates ('kinBtwn') as well as 'inbreeding' coefficients ('kinSelf').
+  Kinship estimates are also returned as a block-diagonal Matrix object in R, with values for
+  pairs outside of family blocks set to zero. The threshold for sparsity may be set by the user.
+  This format represents a huge savings in storage and computation time for subsequent analyses
+  over a dense matrix.
+
+  The final output of the workflow is a plot of kinship estimates vs k0, which gives
+  on overview of the amount of relatedness in the dataset. Only pairs above the specified
+  kinship plot threshold are displayed. Since many analyses include multiple
+  cohorts, a phenotype file may be provided to identify cohorts or groups for plotting separately.
+  The phenotype file should be in RDATA format and contain a data.frame or AnnotatedDataFrame. 
+  Columns must include sample.id and a group variable, with the name of
+  the group column specified as a separate argument. If these inputs are provided, additional
+  plots will be created showing kinship separately within each group and across groups.
+
+  Setting 'ibd_probs' to False with skip computing the IBD probabilities k0 and k1. This
+  saves some computation time, but the kinship plots are not generated.
+$namespaces:
+
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -69,7 +109,7 @@ inputs:
     Threshold for making the output kinship matrix sparse. A block diagonal matrix will be created such that any pair of samples with a kinship estimate greater than the threshold is in the same block; all pairwise estimates within a block are kept, and pairwise estimates between blocks are set to 0.
   type: float?
   sbg:exposed: true
-  sbg:toolDefaultValue: 2^(-11/2) (~0.022, 4th degree)
+  sbg:toolDefaultValue: 2^(-11/2) (fourth-degree relatives and closer)
 - id: ibd_probs
   label: Return IBD probabilities?
   doc: |-
