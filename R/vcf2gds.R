@@ -14,6 +14,11 @@ argp <- add_argument(argp, "--num_cores", default=1, type="integer",
 argv <- parse_args(argp)
 writeParams(argv, "vcf2gds.params")
 
+gdsfile <- argv$gds_file
+if (is.na(gdsfile)) {
+    filebase <- tools::file_path_sans_ext(basename(sub(".gz$", "", argv$vcf_file)))
+    gdsfile <- paste0(filebase, ".gds")
+}
 
 if (!is.na(argv$format)) {
     fmt.import <- argv$format
@@ -29,7 +34,7 @@ if (isBCF) {
     vcffile <- pipe(paste("bcftools view", vcffile), "rt")
 }
 
-seqVCF2GDS(vcffile, argv$gds_file, fmt.import=fmt.import, storage.option="LZMA_RA",
+seqVCF2GDS(vcffile, gdsfile, fmt.import=fmt.import, storage.option="LZMA_RA",
            parallel=argv$num_cores)
 
 if (isBCF) close(vcffile)

@@ -25,3 +25,11 @@ cat vcf2gds.params
 
 Rscript -e '(gds <- SeqArray::seqOpen("test.gds"))'
 
+# default filename
+R -q --vanilla --args \
+  --vcf_file $BASE_PATH/testdata/1KG_phase3_subset_chr21.vcf.gz \
+  < $BASE_PATH/R/vcf2gds.R
+
+cat vcf2gds.params
+
+Rscript -e '(gds <- SeqArray::seqOpen("1KG_phase3_subset_chr21.gds"))'
