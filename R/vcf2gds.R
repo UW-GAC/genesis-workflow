@@ -27,14 +27,16 @@ if (!is.na(argv$format)) {
 }
 
 ## is this a bcf file?
+ncores <- argv$num_cores
 vcffile <- argv$vcf_file
 isBCF <- file_ext(vcffile) == "bcf"
 if (isBCF) {
     ## use bcftools to read text
     vcffile <- pipe(paste("bcftools view", vcffile), "rt")
+    ncores <- FALSE # "No parallel support when the input is a connection object"
 }
 
 seqVCF2GDS(vcffile, gdsfile, fmt.import=fmt.import, storage.option="LZMA_RA",
-           parallel=argv$num_cores)
+           parallel=ncores)
 
 if (isBCF) close(vcffile)
