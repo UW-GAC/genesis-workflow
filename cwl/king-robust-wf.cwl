@@ -78,6 +78,12 @@ inputs:
     Name of column in phenotype_file containing group variable (e.g., study) for plotting.
   type: string?
   sbg:exposed: true
+- id: cpu
+  label: Number of CPUs
+  doc: Number of CPUs to use.
+  type: int?
+  sbg:exposed: true
+  sbg:toolDefaultValue: '4'
 
 outputs:
 - id: king_robust_output
@@ -116,6 +122,8 @@ steps:
     source: sample_include_file
   - id: variant_include_file
     source: variant_include_file
+  - id: cpu
+    source: cpu
   run: tools/king_robust.cwl
   out:
   - id: king_robust_output
