@@ -121,7 +121,8 @@ class Platform(unittest.TestCase):
         cls.inputs['kinship_threshold'] = 0.44
         cls.inputs['divergence_threshold'] = -0.44
         cls.inputs['n_pcs'] = 12
-        cls.inputs['group'] = "Population"
+        cls.inputs['kinship_group'] = "Population"
+        cls.inputs['plot_group'] = "Population"
         cls.inputs['n_pairs'] = 3
         cls.inputs['n_pcs_corr'] = 8
         cls.inputs['n_pcs_plot'] = 4

@@ -19,7 +19,8 @@
         "class": "File",
         "path": "/tmp/1KG_phase3_subset_annot.RData"
     },
-    "group": "Population",
+    "kinship_group": "Population",
+    "plot_group": "Population",
     "gds_file": {
         "class": "File",
         "path": "/tmp/1KG_phase3_subset_pruned.gds"

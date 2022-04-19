@@ -137,10 +137,16 @@ inputs:
   type: int?
   sbg:toolDefaultValue: '6'
   sbg:exposed: true
-- id: group
+- id: kinship_group
   label: Group
   doc: |-
-    Name of column in phenotype_file containing group variable.
+    Name of column in phenotype_file containing group variable. If the median kinship coefficient in a group is > 0, relatedness will be computed separately in that group after adjusting the kinship threshold.
+  type: string?
+  sbg:exposed: true
+- id: plot_group
+  label: Group
+  doc: |-
+    Name of column in phenotype_file containing group variable. PCA plots will be color-coded by group.
   type: string?
   sbg:exposed: true
 - id: run_correlation
@@ -283,7 +289,7 @@ steps:
   - id: phenotype_file
     source: phenotype_file
   - id: group
-    source: group
+    source: kinship_group
   - id: out_prefix
     source: out_prefix
   run: tools/find_unrelated.cwl
@@ -327,7 +333,7 @@ steps:
   - id: n_pairs
     source: n_pairs
   - id: group
-    source: group
+    source: plot_group
   - id: out_prefix
     source: out_prefix
   run: tools/pca_plots.cwl
