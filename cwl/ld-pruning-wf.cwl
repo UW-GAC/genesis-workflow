@@ -282,4 +282,5 @@ steps:
 sbg:categories:
 - GWAS
 - Ancestry and Relatedness
+- Linkage Disequilibrium
 sbg:toolkit: UW-GAC Ancestry and Relatedness
