@@ -41,6 +41,7 @@ doc: |-
   containing all variants, and RData files containing the variant IDs for LD-pruned 
   variants (output by the LD-pruning workflow). Each of these inputs is an array of
   files by chromosome, and the workflow scatters over each GDS/variant file pair.
+  Files for both inputs must be selected in the same order to be paired correctly.
   The set of variants used in the corrlelation is a random sample of variants from
   the full GDS file, along with the entire set of pruned variants. The random sample
   is taken to reduce computation time.
