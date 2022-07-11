@@ -149,7 +149,7 @@ gds2ibdobj <- function(file, sample.id=NULL) {
 #' @export
 kinobj <- function(file) {
     if (tools::file_ext(file) == "gds") {
-        x <- openfn.gds(file)
+        x <- openfn.gds(file, allow.duplicate=TRUE)
     } else {
         x <- getobj(file)
     }
