@@ -51,7 +51,7 @@ inputs:
 - id: sample_include_file
   label: Sample Include file
   doc: |-
-    RData file with vector of sample.id to include. If not provided, all samples in the GDS file are included.
+    RData file with vector of sample.id to include. Required to ensure all samples are represented in the output matrix.
   type: File
   sbg:fileTypes: RDATA
   sbg:x: -539
