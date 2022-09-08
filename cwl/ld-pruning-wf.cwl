@@ -29,7 +29,19 @@ doc: |-
   inclusion in the output GDS file.
 
   In addition to the pruned GDS file, the workflow outputs RData files with vectors of variant.id
-  identifying the pruned variants in each of the input GDS files. 
+  identifying the pruned variants in each of the input GDS files.
+
+  ### Performance Benchmarking
+
+  In the following table you can find estimates of running time and cost.
+
+  | Samples | Parallel instances | Instance type | Spot/On Dem. | CPU | RAM (GB) | Time | Cost |
+  |---|---|---|---|--:|--:|--:|--:|
+  | 2.5k | 1 | c4.2xlarge | Spot | 8 | 9 | 4h 23m | $1.66 |
+  | 2.5k | 3 | c4.2xlarge | Spot | 8 | 9 | 2h 3m | $1.91 |
+  | 10k | 3 | m5.2xlarge | On Demand | 8 | 7 | 6h 7m | $7.43 |
+  | 37k | 3 | m5.2xlarge | On Demand | 8 | 10 | 18h 14m | $26.14 |
+  | 54k | 3 | m5.2xlarge | On Demand | 8 | 4.3 | 28h 58m | $37.33 |
 $namespaces:
   sbg: https://sevenbridges.com
 

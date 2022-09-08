@@ -22,6 +22,18 @@ doc: |-
   Columns must include sample.id and a group variable, with the name of
   the group column specified as a separate argument. If these inputs are provided, additional
   plots will be created showing kinship separately within each group and across groups.
+
+  ### Performance Benchmarking
+
+  In the following table you can find estimates of running time and cost.
+
+  | Samples | Parallel instances | Instance type | Spot/On Dem. | CPU | RAM (GB) | Time | Cost |
+  |---|---|---|---|--:|--:|--:|--:|
+  | 2.5k | 1 | r5.2xlarge | Spot | 4 | 3 | 5m | $0.04 |
+  | 2.5k | 1 | m4.xlarge | Spot | 4 | 3 | 8m | $0.03 |
+  | 10k | 1 | m5.2xlarge | Spot | 8 | 3.5 | 30m | $0.19 |
+  | 37k | 1 | r4.2xlarge | Spot | 8 | 27 | 6h 23m | $2.99 |
+  | 54k | 1 | r5.4xlarge | Spot | 8 | 66 | 7h 34m | $11.24 |
 $namespaces:
   sbg: https://sevenbridges.com
 

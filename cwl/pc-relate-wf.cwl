@@ -41,6 +41,20 @@ doc: |-
 
   Setting 'ibd_probs' to False with skip computing the IBD probabilities k0 and k1. This
   saves some computation time, but the kinship plots are not generated.
+
+  ### Performance Benchmarking
+
+  In the following table you can find estimates of running time and cost.
+
+  | Samples | Parallel instances | Instance type | Spot/On Dem. | CPU | RAM (GB) | Time | Cost | Sample blocks |
+  |---|---|---|---|--:|--:|--:|--:|--:|
+  | 2.5k | 1 | m5.2xlarge | Spot | 1 | 5 | 27m | $0.14 | 1 |
+  | 10k | 1 | m5.2xlarge | Spot | 1 | 27 | 3h 4m | $1.61 | 1 |
+  | 10k | 1 | m5.2xlarge | Spot | 1 | 24 | 2h 1m | $1.06 | 2 |
+  | 37k | 1 | r5.2xlarge | Spot | 1 | 62 | 19h 3m | $6.52 | 8 |
+  | 37k | 2 | r5.4xlarge | Spot | 1 | 124 | 6h 20m | $6.20 | 8 |
+  | 54k | 5 | r5.4xlarge | On Demand | 8 | 113 | 6h 49m | $26.25 | 13 |
+  | 54k | 5 | r5.4xlarge | Spot | 8 |  | 8h 14m | $23.33 | 13 |
 $namespaces:
   sbg: https://sevenbridges.com
 

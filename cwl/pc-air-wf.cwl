@@ -51,6 +51,29 @@ doc: |-
   samples, 3) plots showing PCs, color-coded by group if a phenotype file was
   provided, 4) (optionally) GDS files containing PC-variant correlation values,
   5) (optionally) plots showing PC-variant correlation.
+
+  ### Performance Benchmarking
+
+  In the following table you can find estimates of running time and cost.
+
+  | Samples | Parallel inst. | Instance type | Spot/On Dem. | CPU | RAM (GB) | Time | Cost | Mat. type | Div. Mat. | Corr |
+  |---|---|---|---|--:|--:|--:|--:|---|---|---|---|
+  | 2.5k | 1 | c4.2xlarge | Spot | 8 | 10 | 19m | $0.12 | dense GDS | yes | no |
+  | 2.5k | 1 | m5.2xlarge | Spot | 8 | 10 | 23m | $0.12 | sparse | yes | no |
+  | 2.5k | 1 | m5.2xlarge | Spot | 8 | 10 | 35m | $0.22 | sparse | no | no |
+  | 2.5k | 3 | m5.2xlarge | Spot | 8 | 2.3 | 1h 38m | $0.67 | sparse | yes | yes |
+  | 10k | 1 | m5.2xlarge | Spot | 8 | 5.7 | 1h 33m | $0.74 | dense GDS | yes | no |
+  | 10k | 1 | m5.2xlarge | Spot | 8 | 1.6 | 1h 23m | $0.70 | sparse | yes | no |
+  | 10k | 1 | m5.2xlarge | Spot | 8 | 4.9 | 1h 34m | $0.76 | sparse | no | no |
+  | 10k | 3 | r4.2xlarge | Spot | 8 | 32 | 3h 26m | $2.20 | sparse | yes | yes |
+  | 37k | 1 | m5.2xlarge | Spot | 8 | 11.3 | 4h 32m | $2.38 | sparse | no | no |
+  | 37k | 1 | r4.2xlarge | Spot | 8 | 7.1 | 6h 9m | $2.51 | dense GDS | no | no |
+  | 37k | 1 | m5.2xlarge | Spot | 8 | 17 | 4h 43m | $1.43 | sparse | yes | no |
+  | 37k | 3 | m5.2xlarge | Spot | 8 | 30 | 8h 16m | $5.84 | sparse | yes | yes |
+  | 54k | 1 | r5.2xlarge | Spot | 8 | 17 | 6h 39m | $2.26 | sparse | no | no |
+  | 54k | 1 | r5.2xlarge | Spot | 8 | 8 | 7h 38m | $2.76 | dense GDS | no | no |
+  | 54k | 1 | r5.2xlarge | Spot | 8 | 25 | 6h 59m | $2.37 | sparse | yes | no |
+  | 54k | 3 | r5.2xlarge | Spot | 8 | 33 | 10h 20m | $5.66 | sparse | yes | yes |
 $namespaces:
   sbg: https://sevenbridges.com
 
