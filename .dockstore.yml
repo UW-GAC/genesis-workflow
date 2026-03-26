@@ -7,27 +7,27 @@ workflows:
          - /test/king_ibdseg_wf.json
    - name: king-robust
      subclass: CWL
-     primaryDescriptorPath: king-robust-wf.cwl
+     primaryDescriptorPath: /king-robust-wf.cwl
      testParameterFiles:
          - /test/king_robust_wf.json
    - name: ld-pruning
      subclass: CWL
-     primaryDescriptorPath: ld-pruning-wf.cwl
+     primaryDescriptorPath: /ld-pruning-wf.cwl
      testParameterFiles:
          - /test/ld_pruning_wf.json
    - name: pc-air
      subclass: CWL
-     primaryDescriptorPath: pc-air-wf.cwl
+     primaryDescriptorPath: /pc-air-wf.cwl
      testParameterFiles:
          - /test/pcair_wf.json
    - name: pc-relate
      subclass: CWL
-     primaryDescriptorPath: pc-relate-wf.cwl
+     primaryDescriptorPath: /pc-relate-wf.cwl
      testParameterFiles:
          - /test/pcrelate_wf.json
    - name: pc_variant_correlation
      subclass: CWL
-     primaryDescriptorPath: pc_variant_correlation.cwl
+     primaryDescriptorPath: /pc_variant_correlation.cwl
      testParameterFiles:
          - /test/pca_corr_wf.json
          
