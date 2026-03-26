@@ -1,2 +1,4 @@
 # genesis-workflow
-Workflows for GWAS with the GENESIS R package
+
+Workflows for relatedness and population structure with the GENESIS R
+package and other tools
